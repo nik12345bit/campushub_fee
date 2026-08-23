@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Campus — discover college events, clubs, registrations and announcements in one place.">
+    <title>Admin — Campus</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body data-page="admin">
+    <nav class="nav">
+        <div class="wrap">
+            <div class="nav-inner">
+                <a class="brand" href="index.html"><span class="brand-mark">C</span> Campus</a>
+                <div class="nav-links"><a class="nav-link " href="index.html">Home</a><a class="nav-link "
+                        href="events.html">Events</a><a class="nav-link " href="clubs.html">Clubs</a><a
+                        class="nav-link " href="dashboard.html">Dashboard</a><a class="nav-link active"
+                        href="admin.html" data-admin-only>Admin</a></div>
+                <div class="nav-right"><button aria-label="Open notifications" class="icon-btn"
+                        data-action="notifications"><svg aria-hidden="true" fill="none" height="17"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                            viewBox="0 0 24 24" width="17">
+                            <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"></path>
+                            <path d="M9.5 19a2.5 2.5 0 0 0 5 0"></path>
+                        </svg><span class="dot-badge"></span></button><a class="btn btn-ghost btn-sm"
+                        href="dashboard.html">Hi, <span class="user-first-name">Student</span></a><button
+                        class="btn btn-primary btn-sm" data-action="logout">Logout</button></div>
+            </div>
+            <div class="mobile-nav"><a class="chip " href="index.html">Home</a><a class="chip "
+                    href="events.html">Events</a><a class="chip " href="clubs.html">Clubs</a><a class="chip "
+                    href="dashboard.html">Dashboard</a><a class="chip active" href="admin.html"
+                    data-admin-only>Admin</a><button class="chip" data-action="logout">Logout</button></div>
+        </div>
+    </nav>
+    <main>
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Control panel</p>
+                        <h2 class="section-title" style="margin-top:8px">Admin dashboard</h2>
+                    </div><button class="btn btn-marigold" data-action="create-event"><svg aria-hidden="true"
+                            fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="1.8" viewbox="0 0 24 24" width="15">
+                            <path d="M12 5v14M5 12h14"></path>
+                        </svg> Create event</button>
+                </div>
+                <div class="mini-stats" style="margin-top:0;margin-bottom:30px">
+                    <div class="stat-card">
+                        <div class="stat-num" id="admin-event-count">8</div>
+                        <div class="stat-label">Total events</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" id="admin-registration-count">990</div>
+                        <div class="stat-label">Total registrations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">6</div>
+                        <div class="stat-label">Active clubs</div>
+                    </div>
+                </div>
+                <form class="panel hidden" id="event-editor" style="margin-bottom:26px"><input name="eventId"
+                        type="hidden" />
+                    <div class="panel-title"><span id="editor-title">Create event</span><button class="icon-action"
+                            id="close-event-editor" type="button"><svg aria-hidden="true" fill="none" height="14"
+                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                viewbox="0 0 24 24" width="14">
+                                <path d="M18 6L6 18M6 6l12 12"></path>
+                            </svg></button></div>
+                    <div class="form-grid">
+                        <div class="field"><label>Event title</label><input name="title" required="" /></div>
+                        <div class="field"><label>Category</label><select name="category">
+                                <option>Technical</option>
+                                <option>Cultural</option>
+                                <option>Sports</option>
+                                <option>Workshop</option>
+                                <option>Music</option>
+                                <option>Art</option>
+                                <option>Seminar</option>
+                            </select></div>
+                        <div class="field"><label>Date</label><input name="date" placeholder="e.g. 12 Sep 2026"
+                                required="" /></div>
+                        <div class="field"><label>Venue</label><input name="venue" required="" /></div>
+                        <div class="field"><label>Organizer / club</label><input name="organizer" required="" /></div>
+                        <div class="field"><label>Capacity</label><input min="1" name="capacity" required=""
+                                type="number" value="100" /></div>
+                        <div class="field"><label>Time</label><input name="time"
+                                placeholder="e.g. 10:00 AM – 1:00 PM" /></div>
+
+
+                    </div><button class="btn btn-primary" style="margin-top:16px" type="submit">Save event</button>
+                </form>
+                <div class="admin-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Registrations</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-event-rows">
+                            <tr data-event-row="1">
+                                <td class="admin-title" style="font-weight:600">TechFest Hackathon 2026</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#ECEBFA;color:#423E85">Technical</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">20 Aug 2026</td>
+                                <td class="admin-count">87/120</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit TechFest Hackathon 2026"
+                                            class="icon-action" data-action="edit-event" data-id="1"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete TechFest Hackathon 2026"
+                                            class="icon-action danger" data-action="delete-event" data-id="1"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="2">
+                                <td class="admin-title" style="font-weight:600">Rhythm Nights: Cultural Fest</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#FFE9D2;color:#B85400">Cultural</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">25 Aug 2026</td>
+                                <td class="admin-count">412/500</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit Rhythm Nights: Cultural Fest"
+                                            class="icon-action" data-action="edit-event" data-id="2"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete Rhythm Nights: Cultural Fest"
+                                            class="icon-action danger" data-action="delete-event" data-id="2"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="3">
+                                <td class="admin-title" style="font-weight:600">Campus Football Cup</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#DFF5EA;color:#167A55">Sports</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">02 Sep 2026</td>
+                                <td class="admin-count">150/200</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit Campus Football Cup"
+                                            class="icon-action" data-action="edit-event" data-id="3"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete Campus Football Cup"
+                                            class="icon-action danger" data-action="delete-event" data-id="3"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="4">
+                                <td class="admin-title" style="font-weight:600">AI &amp; ML Workshop</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#FDE8E6;color:#C23D2C">Workshop</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">22 Aug 2026</td>
+                                <td class="admin-count">63/80</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit AI &amp; ML Workshop"
+                                            class="icon-action" data-action="edit-event" data-id="4"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete AI &amp; ML Workshop"
+                                            class="icon-action danger" data-action="delete-event" data-id="4"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="5">
+                                <td class="admin-title" style="font-weight:600">Canvas &amp; Chaos: Art Competition</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#E4F1FB;color:#2A6C9E">Art</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">28 Aug 2026</td>
+                                <td class="admin-count">22/60</td>
+                                <td>
+                                    <div class="table-actions"><button
+                                            aria-label="Edit Canvas &amp; Chaos: Art Competition" class="icon-action"
+                                            data-action="edit-event" data-id="5"><svg aria-hidden="true" fill="none"
+                                                height="14" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"
+                                                width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button
+                                            aria-label="Delete Canvas &amp; Chaos: Art Competition"
+                                            class="icon-action danger" data-action="delete-event" data-id="5"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="6">
+                                <td class="admin-title" style="font-weight:600">Open Mic &amp; Music Night</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#F3E4F0;color:#8A3A78">Music</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">30 Aug 2026</td>
+                                <td class="admin-count">140/150</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit Open Mic &amp; Music Night"
+                                            class="icon-action" data-action="edit-event" data-id="6"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete Open Mic &amp; Music Night"
+                                            class="icon-action danger" data-action="delete-event" data-id="6"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="7">
+                                <td class="admin-title" style="font-weight:600">Design Thinking Seminar</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#F1EFE6;color:#6B6350">Seminar</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">05 Sep 2026</td>
+                                <td class="admin-count">40/100</td>
+                                <td>
+                                    <div class="table-actions"><button aria-label="Edit Design Thinking Seminar"
+                                            class="icon-action" data-action="edit-event" data-id="7"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button aria-label="Delete Design Thinking Seminar"
+                                            class="icon-action danger" data-action="delete-event" data-id="7"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                            <tr data-event-row="8">
+                                <td class="admin-title" style="font-weight:600">Code Wars: Competitive Programming</td>
+                                <td class="admin-category"><span class="tag"
+                                        style="background:#ECEBFA;color:#423E85">Technical</span></td>
+                                <td class="mono admin-date" style="font-size:12.5px">08 Sep 2026</td>
+                                <td class="admin-count">76/100</td>
+                                <td>
+                                    <div class="table-actions"><button
+                                            aria-label="Edit Code Wars: Competitive Programming" class="icon-action"
+                                            data-action="edit-event" data-id="8"><svg aria-hidden="true" fill="none"
+                                                height="14" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"
+                                                width="14">
+                                                <path d="M12 20h9"></path>
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"></path>
+                                            </svg></button><button
+                                            aria-label="Delete Code Wars: Competitive Programming"
+                                            class="icon-action danger" data-action="delete-event" data-id="8"><svg
+                                                aria-hidden="true" fill="none" height="14" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                                viewbox="0 0 24 24" width="14">
+                                                <path d="M3 6h18"></path>
+                                                <path d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"></path>
+                                                <path
+                                                    d="M19 6l-1 14.5A1.5 1.5 0 0 1 16.5 22h-9A1.5 1.5 0 0 1 6 20.5L5 6">
+                                                </path>
+                                            </svg></button></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="admin-table-wrap" style="margin-top:30px">
+                    <div class="panel-title" style="margin-bottom:14px">Registered students<button
+                            class="btn btn-ghost btn-sm" data-action="notify-user" data-email="all">Notify all
+                            students</button></div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Registered events</th>
+                                <th>Clubs joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-user-rows"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <div>
+                <div class="brand" style="color:#fff"><span class="brand-mark">C</span> Campus</div>
+                <p style="font-size:13.5px;color:#9EA1AC;margin-top:14px;line-height:1.6;max-width:280px">The board
+                    where every fest, workshop and club on campus lives in one place — built by students, for students.
+                </p>
+            </div>
+            <div>
+                <h4>Platform</h4><a href="events.html">Events</a><a href="clubs.html">Clubs</a><a
+                    href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a>
+            </div>
+            <div>
+                <h4>Explore</h4><a href="events.html?category=Technical">Technical</a><a
+                    href="events.html?category=Cultural">Cultural</a><a href="events.html?category=Sports">Sports</a><a
+                    href="events.html?category=Workshop">Workshops</a>
+            </div>
+            <div>
+                <h4>Support</h4><a href="#">Help center</a><a href="#">Contact</a><a href="#">Report an issue</a>
+            </div>
+        </div>
+        <div class="wrap footer-bottom"><span>© 2026 Campus. A student community platform.</span><span>Made for one
+                college, built for every college.</span></div>
+    </footer>
+    <div id="modal-root"></div>
+    <script defer src="app.js"></script>
+</body>
+
+</html>

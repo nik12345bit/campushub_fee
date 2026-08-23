@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Campus — discover college events, clubs, registrations and announcements in one place.">
+    <title>Login — Campus</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body data-page="login">
+    <main class="login-page">
+        <div class="login-shell">
+            <section class="login-showcase">
+                <div>
+                    <div class="brand login-brand"><span class="brand-mark">C</span> Campus</div>
+                    <p class="eyebrow login-eyebrow">Your college, connected</p>
+                    <h1>Everything happening on campus, in one place.</h1>
+                    <p class="login-lead">Log in to discover events, register for activities, join clubs, track your
+                        dashboard and manage campus events.</p>
+                </div>
+                <div class="login-feature-grid">
+                    <div class="login-feature"><span>📅</span>
+                        <div><strong>Events</strong><small>Discover and register</small></div>
+                    </div>
+                    <div class="login-feature"><span>👥</span>
+                        <div><strong>Clubs</strong><small>Find your community</small></div>
+                    </div>
+                    <div class="login-feature"><span>🔔</span>
+                        <div><strong>Updates</strong><small>Never miss an announcement</small></div>
+                    </div>
+                    <div class="login-feature"><span>✏️</span>
+                        <div><strong>Admin</strong><small>Create and manage events</small></div>
+                    </div>
+                </div>
+            </section>
+            <section class="login-card-wrap">
+                <div class="login-card">
+                    <div class="login-card-head">
+                        <div>
+                            <p class="eyebrow">Campus account</p>
+                            <h2>Welcome back</h2>
+                        </div>
+                    </div>
+                    <div class="auth-error hidden" id="auth-error" role="alert"></div>
+                    <form class="login-form" id="login-form">
+                        <div class="field"><label>College email</label><input autocomplete="email" name="email"
+                                placeholder="you@college.edu" required type="email"></div>
+                        <div class="field"><label>Password</label><input autocomplete="current-password" minlength="6"
+                                name="password" placeholder="Minimum 6 characters" required type="password"></div><label
+                            class="show-password"><input class="show-password-check" type="checkbox"> Show
+                            password</label><button class="btn btn-marigold btn-block login-submit" type="submit">Log in
+                            to Campus</button>
+                    </form>
+                    <div class="demo-login">
+                        <div><strong>Demo account</strong><span>Use this if you want to test immediately.</span></div>
+                        <code>student@campus.edu</code><code>campus123</code><button class="btn btn-ghost btn-sm"
+                            id="demo-login" type="button">Use demo login</button>
+                    </div>
+                    <div class="demo-login">
+                        <div><strong>Demo admin</strong><span>Test the admin dashboard.</span></div>
+                        <code>admin@campus.edu</code><code>admin123</code><button class="btn btn-ghost btn-sm"
+                            id="demo-admin-login" type="button">Use admin login</button>
+                    </div>
+                    <p class="auth-switch-link">New here? <a href="signup.html">Create an account</a></p>
+                    <p class="login-note">Frontend-only demo: account data is saved in this browser using localStorage.
+                        Do not use a real password.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script defer src="app.js"></script>
+</body>
+
+</html>

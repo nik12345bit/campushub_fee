@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description"
+        content="Campus — discover college events, clubs, registrations and announcements in one place.">
+    <title>Clubs — Campus</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body data-page="clubs">
+    <nav class="nav">
+        <div class="wrap">
+            <div class="nav-inner">
+                <a class="brand" href="index.html"><span class="brand-mark">C</span> Campus</a>
+                <div class="nav-links"><a class="nav-link " href="index.html">Home</a><a class="nav-link "
+                        href="events.html">Events</a><a class="nav-link active" href="clubs.html">Clubs</a><a
+                        class="nav-link " href="dashboard.html">Dashboard</a><a class="nav-link " href="admin.html"
+                        data-admin-only>Admin</a></div>
+                <div class="nav-right"><button aria-label="Open notifications" class="icon-btn"
+                        data-action="notifications"><svg aria-hidden="true" fill="none" height="17"
+                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                            viewBox="0 0 24 24" width="17">
+                            <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"></path>
+                            <path d="M9.5 19a2.5 2.5 0 0 0 5 0"></path>
+                        </svg><span class="dot-badge"></span></button><a class="btn btn-ghost btn-sm"
+                        href="dashboard.html">Hi, <span class="user-first-name">Student</span></a><button
+                        class="btn btn-primary btn-sm" data-action="logout">Logout</button></div>
+            </div>
+            <div class="mobile-nav"><a class="chip " href="index.html">Home</a><a class="chip "
+                    href="events.html">Events</a><a class="chip active" href="clubs.html">Clubs</a><a class="chip "
+                    href="dashboard.html">Dashboard</a><a class="chip " href="admin.html"
+                    data-admin-only>Admin</a><button class="chip" data-action="logout">Logout</button></div>
+        </div>
+    </nav>
+    <main>
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Community</p>
+                        <h2 class="section-title" style="margin-top:8px">All clubs</h2>
+                    </div>
+                </div>
+                <div class="clubs-grid">
+                    <article class="club-card"
+                        data-about="A community for students interested in programming, development and competitive coding — running weekly practice sessions and two flagship events a year."
+                        data-action="open-club" data-color="#423E85"
+                        data-events='["TechFest Hackathon 2026", "Code Wars: Competitive Programming"]' data-id="1"
+                        data-members="245" data-name="Coding Club" data-president="Aditi Sharma" data-short="CC"
+                        style="cursor:pointer">
+                        <div class="club-icon" style="background:#423E85">CC</div>
+                        <div class="club-name">Coding Club</div>
+                        <div class="club-meta">245 members · President: Aditi Sharma</div>
+                        <div class="club-about">A community for students interested in programming, development and
+                            competitive coding — running weekly practice sessions and two flagship events a year.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                    <article class="club-card"
+                        data-about="Plans and runs the college's dance, drama and music events, from department-level showcases to the annual cultural fest."
+                        data-action="open-club" data-color="#B85400" data-events='["Rhythm Nights: Cultural Fest"]'
+                        data-id="2" data-members="180" data-name="Cultural Committee" data-president="Rohan Verma"
+                        data-short="CU" style="cursor:pointer">
+                        <div class="club-icon" style="background:#B85400">CU</div>
+                        <div class="club-name">Cultural Committee</div>
+                        <div class="club-meta">180 members · President: Rohan Verma</div>
+                        <div class="club-about">Plans and runs the college's dance, drama and music events, from
+                            department-level showcases to the annual cultural fest.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                    <article class="club-card"
+                        data-about="Organises inter-department tournaments across football, cricket, basketball and athletics throughout the year."
+                        data-action="open-club" data-color="#167A55" data-events='["Campus Football Cup"]' data-id="3"
+                        data-members="310" data-name="Sports Club" data-president="Meera Iyer" data-short="SP"
+                        style="cursor:pointer">
+                        <div class="club-icon" style="background:#167A55">SP</div>
+                        <div class="club-name">Sports Club</div>
+                        <div class="club-meta">310 members · President: Meera Iyer</div>
+                        <div class="club-about">Organises inter-department tournaments across football, cricket,
+                            basketball and athletics throughout the year.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                    <article class="club-card"
+                        data-about="Focused on applied machine learning — reading groups, workshops and a student research showcase each semester."
+                        data-action="open-club" data-color="#2A6C9E" data-events='["AI &amp; ML Workshop"]' data-id="4"
+                        data-members="150" data-name="AI Club" data-president="Karan Mehta" data-short="AI"
+                        style="cursor:pointer">
+                        <div class="club-icon" style="background:#2A6C9E">AI</div>
+                        <div class="club-name">AI Club</div>
+                        <div class="club-meta">150 members · President: Karan Mehta</div>
+                        <div class="club-about">Focused on applied machine learning — reading groups, workshops and a
+                            student research showcase each semester.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                    <article class="club-card"
+                        data-about="A space for painters, sketch artists and sculptors to exhibit work and run on-campus competitions."
+                        data-action="open-club" data-color="#8A3A78"
+                        data-events='["Canvas &amp; Chaos: Art Competition"]' data-id="5" data-members="95"
+                        data-name="Fine Arts Society" data-president="Priya Nair" data-short="FA"
+                        style="cursor:pointer">
+                        <div class="club-icon" style="background:#8A3A78">FA</div>
+                        <div class="club-name">Fine Arts Society</div>
+                        <div class="club-meta">95 members · President: Priya Nair</div>
+                        <div class="club-about">A space for painters, sketch artists and sculptors to exhibit work and
+                            run on-campus competitions.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                    <article class="club-card"
+                        data-about="Runs jam sessions, the open mic series and represents the college at inter-college music festivals."
+                        data-action="open-club" data-color="#C23D2C" data-events='["Open Mic &amp; Music Night"]'
+                        data-id="6" data-members="120" data-name="Music Club" data-president="Yash Kapoor"
+                        data-short="MU" style="cursor:pointer">
+                        <div class="club-icon" style="background:#C23D2C">MU</div>
+                        <div class="club-name">Music Club</div>
+                        <div class="club-meta">120 members · President: Yash Kapoor</div>
+                        <div class="club-about">Runs jam sessions, the open mic series and represents the college at
+                            inter-college music festivals.</div>
+                        <span class="tag club-joined-badge hidden"
+                            style="background:#DFF5EA;color:#167A55;width:fit-content">Joined</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <div>
+                <div class="brand" style="color:#fff"><span class="brand-mark">C</span> Campus</div>
+                <p style="font-size:13.5px;color:#9EA1AC;margin-top:14px;line-height:1.6;max-width:280px">The board
+                    where every fest, workshop and club on campus lives in one place — built by students, for students.
+                </p>
+            </div>
+            <div>
+                <h4>Platform</h4><a href="events.html">Events</a><a href="clubs.html">Clubs</a><a
+                    href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a>
+            </div>
+            <div>
+                <h4>Explore</h4><a href="events.html?category=Technical">Technical</a><a
+                    href="events.html?category=Cultural">Cultural</a><a href="events.html?category=Sports">Sports</a><a
+                    href="events.html?category=Workshop">Workshops</a>
+            </div>
+            <div>
+                <h4>Support</h4><a href="#">Help center</a><a href="#">Contact</a><a href="#">Report an issue</a>
+            </div>
+        </div>
+        <div class="wrap footer-bottom"><span>© 2026 Campus. A student community platform.</span><span>Made for one
+                college, built for every college.</span></div>
+    </footer>
+    <div id="modal-root"></div>
+    <script defer src="app.js"></script>
+</body>
+
+</html>
