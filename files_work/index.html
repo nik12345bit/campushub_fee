@@ -8,6 +8,8 @@
         content="Campus — discover college events, clubs, registrations and announcements in one place.">
     <title>Campus — Your College, Connected.</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%2314171F%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-family=%27Georgia,serif%27 font-size=%2736%27 font-weight=%27700%27 fill=%27%23FF8A1E%27 text-anchor=%27middle%27%3EC%3C/text%3E%3C/svg%3E">
 </head>
 
 <body data-page="home">
@@ -70,12 +72,14 @@
                     <div class="board">
                         <div class="pin-card pin-card-1">
                             <div class="hero-tape" style="top:-14px;left:20px;background:rgba(255,138,30,.55)"></div>
-                            <span class="tag" style="background:#ECEBFA;color:#423E85">Technical</span>
+                            <div class="pin-dot"></div><span class="tag"
+                                style="background:#ECEBFA;color:#423E85">Technical</span>
                             <div class="pin-title">TechFest Hackathon 2026</div>
                             <div class="pin-meta"><span>20 Aug · Innovation Lab</span><span>87/120 registered</span>
                             </div>
                         </div>
-                        <div class="pin-card pin-card-2"><span class="tag"
+                        <div class="pin-card pin-card-2">
+                            <div class="pin-dot"></div><span class="tag"
                                 style="background:#FFE9D2;color:#B85400">Cultural</span>
                             <div class="pin-title">Rhythm Nights: Cultural Fest</div>
                             <div class="pin-meta"><span>25 Aug · Amphitheatre</span><span>412/500 registered</span>
@@ -83,8 +87,9 @@
                         </div>
                         <div class="pin-card pin-card-3">
                             <div class="hero-tape"
-                                style="top:-14px;right:20px;left:auto;background:rgba(66,62,133,.35)"></div><span
-                                class="tag" style="background:#DFF5EA;color:#167A55">Sports</span>
+                                style="top:-14px;right:20px;left:auto;background:rgba(66,62,133,.35)"></div>
+                            <div class="pin-dot"></div><span class="tag"
+                                style="background:#DFF5EA;color:#167A55">Sports</span>
                             <div class="pin-title">Campus Football Cup</div>
                             <div class="pin-meta"><span>02 Sep · Sports Ground</span><span>150/200 registered</span>
                             </div>
@@ -123,7 +128,8 @@
                     <article class="event-card home-event" data-capacity="120" data-category="Technical"
                         data-date="20 Aug 2026"
                         data-description="A 24-hour coding competition where student teams design and build working prototypes for real campus problems, judged by faculty and industry mentors."
-                        data-id="1" data-organizer="Coding Club" data-registered="87"
+                        data-id="1" data-lat="30.51665" data-lng="76.65865" data-organizer="Coding Club"
+                        data-registered="87"
                         data-requirements='["Team of 2\u20134 members", "Valid college ID required", "Own laptop required", "Basic knowledge of any programming language"]'
                         data-time="10:00 AM – 6:00 PM (24 hrs)" data-title="TechFest Hackathon 2026"
                         data-venue="Innovation Lab, Block A">
@@ -164,7 +170,8 @@
                     <article class="event-card home-event" data-capacity="500" data-category="Cultural"
                         data-date="25 Aug 2026"
                         data-description="The college's flagship evening of dance, drama and music, featuring performances from every department and a headline student band showcase."
-                        data-id="2" data-organizer="Cultural Committee" data-registered="412"
+                        data-id="2" data-lat="30.51605" data-lng="76.65995" data-organizer="Cultural Committee"
+                        data-registered="412"
                         data-requirements='["Open to all students", "Performer entries close 3 days prior", "Audience entry free with college ID"]'
                         data-time="5:00 PM – 10:00 PM" data-title="Rhythm Nights: Cultural Fest"
                         data-venue="Open Air Amphitheatre">
@@ -205,7 +212,8 @@
                     <article class="event-card home-event" data-capacity="200" data-category="Sports"
                         data-date="02 Sep 2026"
                         data-description="Inter-department knockout football tournament running through the day, ending with a final under floodlights."
-                        data-id="3" data-organizer="Sports Club" data-registered="150"
+                        data-id="3" data-lat="30.5173" data-lng="76.6601" data-organizer="Sports Club"
+                        data-registered="150"
                         data-requirements='["Team of 11 + 4 substitutes", "Department ID required", "Sports kit mandatory"]'
                         data-time="8:00 AM – 4:00 PM" data-title="Campus Football Cup" data-venue="Main Sports Ground">
                         <div class="event-card-top"><span class="tag"

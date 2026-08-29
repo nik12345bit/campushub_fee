@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f8efe1"/><stop offset="1" stop-color="#e7d7c1"/></linearGradient>
+  <linearGradient id="floor" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b7835c"/><stop offset="1" stop-color="#d0a274"/></linearGradient>
+  <linearGradient id="window" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bfe8f5"/><stop offset="1" stop-color="#78b8d0"/></linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-opacity=".18"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#wall)"/>
+<rect y="640" width="1600" height="260" fill="url(#floor)"/>
+<!-- window -->
+<rect x="1060" y="90" width="380" height="300" rx="14" fill="#f4f0e6" filter="url(#shadow)"/>
+<rect x="1080" y="110" width="340" height="260" rx="8" fill="url(#window)"/>
+<path d="M1250 110v260M1080 240h340" stroke="#fff" stroke-width="12" opacity=".8"/>
+<circle cx="1180" cy="170" r="28" fill="#ffe08a" opacity=".9"/>
+<path d="M1100 330q80-80 150 0t150 0" fill="#74a56b" opacity=".75"/>
+<!-- board -->
+<rect x="120" y="105" width="700" height="330" rx="20" fill="#315b55" filter="url(#shadow)"/>
+<rect x="150" y="135" width="640" height="270" rx="12" fill="#3e6b63"/>
+<text x="190" y="195" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#fff8df">TODAY'S STUDY PLAN</text>
+<path d="M200 245h410M200 295h500M200 345h330" stroke="#f5d98b" stroke-width="16" stroke-linecap="round" opacity=".9"/>
+<circle cx="690" cy="255" r="35" fill="#ffd34e"/><path d="M675 255l12 12 25-30" fill="none" stroke="#315b55" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- plant -->
+<path d="M970 590v-80" stroke="#6b4b35" stroke-width="18"/><path d="M970 520q-70-80-115 10 65-20 115 20 40-85 110-50-20 75-110 30" fill="#5e8f63"/>
+<path d="M930 600h80l-12 70h-56z" fill="#c46f4d"/>
+<!-- table -->
+<rect x="260" y="565" width="920" height="55" rx="18" fill="#754f38"/>
+<path d="M330 620l-35 270M1110 620l35 270" stroke="#5b3d2c" stroke-width="28" stroke-linecap="round"/>
+<!-- student 1 -->
+<g filter="url(#shadow)">
+ <circle cx="520" cy="470" r="72" fill="#8d5a3c"/>
+ <path d="M455 455q25-105 135-55l18 70q-70-38-153-15z" fill="#2f3540"/>
+ <path d="M435 555q85-80 170 0l30 120H405z" fill="#ef8b5a"/>
+ <rect x="470" y="590" width="190" height="24" rx="10" fill="#f7d9a6" transform="rotate(-8 470 590)"/>
+ <path d="M510 550q60 40 115 10" stroke="#8d5a3c" stroke-width="24" stroke-linecap="round" fill="none"/>
+</g>
+<!-- student 2 -->
+<g filter="url(#shadow)">
+ <circle cx="800" cy="455" r="70" fill="#a86f4b"/>
+ <path d="M735 445q18-95 130-58l12 78q-70-35-142-5z" fill="#4b3029"/>
+ <path d="M720 555q80-75 165 0l30 120H690z" fill="#6f91bd"/>
+ <rect x="760" y="590" width="190" height="24" rx="10" fill="#fff" transform="rotate(7 760 590)"/>
+ <path d="M760 550q50 42 110 20" stroke="#a86f4b" stroke-width="24" stroke-linecap="round" fill="none"/>
+</g>
+<!-- student 3 -->
+<g filter="url(#shadow)">
+ <circle cx="1060" cy="470" r="68" fill="#75492f"/>
+ <path d="M995 455q18-90 125-58l15 70q-70-32-140-5z" fill="#1f2933"/>
+ <path d="M980 555q80-78 165 0l30 120H950z" fill="#d8b04f"/>
+ <rect x="1010" y="590" width="190" height="24" rx="10" fill="#f6f1df" transform="rotate(-5 1010 590)"/>
+ <path d="M1020 555q50 40 110 10" stroke="#75492f" stroke-width="24" stroke-linecap="round" fill="none"/>
+</g>
+<!-- books / stationery -->
+<rect x="430" y="535" width="130" height="18" rx="6" fill="#e65b50" transform="rotate(-8 430 535)"/>
+<rect x="850" y="525" width="120" height="18" rx="6" fill="#f0c84b" transform="rotate(7 850 525)"/>
+<rect x="1040" y="540" width="110" height="18" rx="6" fill="#5f9ec9" transform="rotate(-5 1040 540)"/>
+<!-- warm foreground -->
+<rect y="820" width="1600" height="80" fill="#5d4638" opacity=".12"/>
+</svg>

@@ -1,422 +1,553 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description"
-        content="Campus — discover college events, clubs, registrations and announcements in one place.">
-    <title>Events — Campus</title>
-    <link href="style.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Campus — discover college events, clubs, registrations and announcements in one place.">
+<title>Events — Campus</title>
+<link href="style.css" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%2314171F%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-family=%27Georgia,serif%27 font-size=%2736%27 font-weight=%27700%27 fill=%27%23FF8A1E%27 text-anchor=%27middle%27%3EC%3C/text%3E%3C/svg%3E">
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
 </head>
-
 <body data-page="events">
-    <nav class="nav">
-        <div class="wrap">
-            <div class="nav-inner">
-                <a class="brand" href="index.html"><span class="brand-mark">C</span> Campus</a>
-                <div class="nav-links"><a class="nav-link " href="index.html">Home</a><a class="nav-link active"
-                        href="events.html">Events</a><a class="nav-link " href="clubs.html">Clubs</a><a
-                        class="nav-link " href="dashboard.html">Dashboard</a><a class="nav-link " href="admin.html"
-                        data-admin-only>Admin</a></div>
-                <div class="nav-right"><button aria-label="Open notifications" class="icon-btn"
-                        data-action="notifications"><svg aria-hidden="true" fill="none" height="17"
-                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            viewBox="0 0 24 24" width="17">
-                            <path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"></path>
-                            <path d="M9.5 19a2.5 2.5 0 0 0 5 0"></path>
-                        </svg><span class="dot-badge"></span></button><a class="btn btn-ghost btn-sm"
-                        href="dashboard.html">Hi, <span class="user-first-name">Student</span></a><button
-                        class="btn btn-primary btn-sm" data-action="logout">Logout</button></div>
-            </div>
-            <div class="mobile-nav"><a class="chip " href="index.html">Home</a><a class="chip active"
-                    href="events.html">Events</a><a class="chip " href="clubs.html">Clubs</a><a class="chip "
-                    href="dashboard.html">Dashboard</a><a class="chip " href="admin.html"
-                    data-admin-only>Admin</a><button class="chip" data-action="logout">Logout</button></div>
-        </div>
-    </nav>
-    <main>
-        <section class="section">
-            <div class="wrap">
-                <div class="section-head">
-                    <div>
-                        <p class="eyebrow">Discover</p>
-                        <h2 class="section-title" style="margin-top:8px">All events</h2>
-                    </div><label class="search-box"><svg aria-hidden="true" fill="none" height="15"
-                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            viewbox="0 0 24 24" width="15">
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <path d="M21 21l-4.3-4.3"></path>
-                        </svg><input aria-label="Search events" id="event-search"
-                            placeholder="Search events or clubs" /></label>
-                </div>
-                <div class="chip-row" style="margin-bottom:30px"><button class="chip active"
-                        data-category="All">All</button><button class="chip"
-                        data-category="Technical">Technical</button><button class="chip"
-                        data-category="Cultural">Cultural</button><button class="chip"
-                        data-category="Sports">Sports</button><button class="chip"
-                        data-category="Workshop">Workshop</button><button class="chip"
-                        data-category="Music">Music</button><button class="chip" data-category="Art">Art</button><button
-                        class="chip" data-category="Seminar">Seminar</button></div>
-                <div class="events-grid" id="events-grid">
-                    <article class="event-card all-event" data-capacity="120" data-category="Technical"
-                        data-date="20 Aug 2026"
-                        data-description="A 24-hour coding competition where student teams design and build working prototypes for real campus problems, judged by faculty and industry mentors."
-                        data-id="1" data-organizer="Coding Club" data-registered="87"
-                        data-requirements='["Team of 2\u20134 members", "Valid college ID required", "Own laptop required", "Basic knowledge of any programming language"]'
-                        data-time="10:00 AM – 6:00 PM (24 hrs)" data-title="TechFest Hackathon 2026"
-                        data-venue="Innovation Lab, Block A">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#ECEBFA;color:#423E85">Technical</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">TechFest Hackathon 2026</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">20 Aug 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Innovation Lab, Block A</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">87</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:72%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">33 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="1">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="500" data-category="Cultural"
-                        data-date="25 Aug 2026"
-                        data-description="The college's flagship evening of dance, drama and music, featuring performances from every department and a headline student band showcase."
-                        data-id="2" data-organizer="Cultural Committee" data-registered="412"
-                        data-requirements='["Open to all students", "Performer entries close 3 days prior", "Audience entry free with college ID"]'
-                        data-time="5:00 PM – 10:00 PM" data-title="Rhythm Nights: Cultural Fest"
-                        data-venue="Open Air Amphitheatre">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#FFE9D2;color:#B85400">Cultural</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Rhythm Nights: Cultural Fest</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">25 Aug 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Open Air Amphitheatre</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">412</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:82%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">88 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="2">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="200" data-category="Sports"
-                        data-date="02 Sep 2026"
-                        data-description="Inter-department knockout football tournament running through the day, ending with a final under floodlights."
-                        data-id="3" data-organizer="Sports Club" data-registered="150"
-                        data-requirements='["Team of 11 + 4 substitutes", "Department ID required", "Sports kit mandatory"]'
-                        data-time="8:00 AM – 4:00 PM" data-title="Campus Football Cup" data-venue="Main Sports Ground">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#DFF5EA;color:#167A55">Sports</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Campus Football Cup</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">02 Sep 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Main Sports Ground</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">150</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:75%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">50 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="3">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="80" data-category="Workshop"
-                        data-date="22 Aug 2026"
-                        data-description="A hands-on session covering the fundamentals of machine learning, ending with participants training a small model of their own."
-                        data-id="4" data-organizer="AI Club" data-registered="63"
-                        data-requirements='["Laptop with Python installed", "No prior ML experience needed"]'
-                        data-time="2:00 PM – 5:00 PM" data-title="AI &amp; ML Workshop" data-venue="Seminar Hall 2">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#FDE8E6;color:#C23D2C">Workshop</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">AI &amp; ML Workshop</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">22 Aug 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Seminar Hall 2</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">63</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:79%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">17 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="4">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="60" data-category="Art" data-date="28 Aug 2026"
-                        data-description="An open-theme on-the-spot painting competition. Materials provided; bring your own brushes if you have a preference."
-                        data-id="5" data-organizer="Fine Arts Society" data-registered="22"
-                        data-requirements='["Individual entries only", "Theme announced on the day"]'
-                        data-time="11:00 AM – 3:00 PM" data-title="Canvas &amp; Chaos: Art Competition"
-                        data-venue="Art Studio">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#E4F1FB;color:#2A6C9E">Art</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Canvas &amp; Chaos: Art Competition</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">28 Aug 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Art Studio</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">22</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:37%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">38 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="5">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="150" data-category="Music"
-                        data-date="30 Aug 2026"
-                        data-description="An evening for singers, instrumentalists and poets to take the stage. Sign up for a 5-minute slot or just come to listen."
-                        data-id="6" data-organizer="Music Club" data-registered="140"
-                        data-requirements='["5-minute slot per performer", "Backing tracks accepted"]'
-                        data-time="7:00 PM – 9:30 PM" data-title="Open Mic &amp; Music Night" data-venue="Amphitheatre">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#F3E4F0;color:#8A3A78">Music</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Open Mic &amp; Music Night</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">30 Aug 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Amphitheatre</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">140</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:93%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">10 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="6">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="100" data-category="Seminar"
-                        data-date="05 Sep 2026"
-                        data-description="A guest-led session on applying design thinking to early-stage startup ideas, with a live case study from a campus-founded venture."
-                        data-id="7" data-organizer="Entrepreneurship Cell" data-registered="40"
-                        data-requirements='["Open to all years", "Notebook recommended"]'
-                        data-time="10:00 AM – 12:00 PM" data-title="Design Thinking Seminar"
-                        data-venue="Conference Room">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#F1EFE6;color:#6B6350">Seminar</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Design Thinking Seminar</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">05 Sep 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Conference Room</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">40</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:40%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">60 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="7">View details</button>
-                        </div>
-                    </article>
-                    <article class="event-card all-event" data-capacity="100" data-category="Technical"
-                        data-date="08 Sep 2026"
-                        data-description="A timed individual contest across three difficulty tiers, with prizes for the top scorer in each year group."
-                        data-id="8" data-organizer="Coding Club" data-registered="76"
-                        data-requirements='["Individual entry", "Laptop provided in the lab"]'
-                        data-time="9:00 AM – 1:00 PM" data-title="Code Wars: Competitive Programming"
-                        data-venue="Computer Lab 3">
-                        <div class="event-card-top"><span class="tag"
-                                style="background:#ECEBFA;color:#423E85">Technical</span><span class="status-open"><span
-                                    class="status-dot"></span><span class="status-label">Open</span></span></div>
-                        <div>
-                            <div class="event-title">Code Wars: Competitive Programming</div>
-                            <div class="event-meta" style="margin-top:10px">
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
-                                        <path d="M8 3v4M16 3v4M3 10h18"></path>
-                                    </svg> <span class="event-date">08 Sep 2026</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"></path>
-                                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                                    </svg> <span class="event-venue">Computer Lab 3</span></div>
-                                <div class="event-meta-row"><svg aria-hidden="true" fill="none" height="14"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="1.8" viewbox="0 0 24 24" width="14">
-                                        <circle cx="9" cy="8" r="3.3"></circle>
-                                        <path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"></path>
-                                        <path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1"></path>
-                                    </svg> <span class="event-registered">76</span> registered</div>
-                            </div>
-                        </div>
-                        <div class="cap-bar">
-                            <div class="cap-fill" style="width:76%"></div>
-                        </div>
-                        <div class="event-card-foot"><span class="cap-text">24 spots left</span><button
-                                class="btn btn-ghost btn-sm" data-action="open-event" data-id="8">View details</button>
-                        </div>
-                    </article>
-                </div>
-                <div class="empty-state hidden" id="events-empty">
-                    <h3 style="font-size:18px;color:var(--ink)">No events match your search</h3>
-                    <p style="margin-top:8px;font-size:14px">Try a different keyword or clear the category filter.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="footer">
-        <div class="wrap footer-inner">
-            <div>
-                <div class="brand" style="color:#fff"><span class="brand-mark">C</span> Campus</div>
-                <p style="font-size:13.5px;color:#9EA1AC;margin-top:14px;line-height:1.6;max-width:280px">The board
-                    where every fest, workshop and club on campus lives in one place — built by students, for students.
-                </p>
-            </div>
-            <div>
-                <h4>Platform</h4><a href="events.html">Events</a><a href="clubs.html">Clubs</a><a
-                    href="dashboard.html">Dashboard</a><a href="admin.html">Admin</a>
-            </div>
-            <div>
-                <h4>Explore</h4><a href="events.html?category=Technical">Technical</a><a
-                    href="events.html?category=Cultural">Cultural</a><a href="events.html?category=Sports">Sports</a><a
-                    href="events.html?category=Workshop">Workshops</a>
-            </div>
-            <div>
-                <h4>Support</h4><a href="#">Help center</a><a href="#">Contact</a><a href="#">Report an issue</a>
-            </div>
-        </div>
-        <div class="wrap footer-bottom"><span>© 2026 Campus. A student community platform.</span><span>Made for one
-                college, built for every college.</span></div>
-    </footer>
-    <div id="modal-root"></div>
-    <script defer src="app.js"></script>
+<nav class="nav">
+<div class="wrap">
+<div class="nav-inner">
+<a class="brand" href="index.html">
+<span class="brand-mark">C</span> Campus</a>
+<div class="nav-links">
+<a class="nav-link " href="index.html">Home</a>
+<a class="nav-link active" href="events.html">Events</a>
+<a class="nav-link " href="clubs.html">Clubs</a>
+<a class="nav-link " href="dashboard.html">Dashboard</a>
+<a class="nav-link " href="admin.html" data-admin-only>Admin</a>
+</div>
+<div class="nav-right">
+<button aria-label="Open notifications" class="icon-btn" data-action="notifications">
+<svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24" width="17">
+<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z">
+</path>
+<path d="M9.5 19a2.5 2.5 0 0 0 5 0">
+</path>
+</svg>
+<span class="dot-badge">
+</span>
+</button>
+<a class="btn btn-ghost btn-sm" href="dashboard.html">Hi, <span class="user-first-name">Student</span>
+</a>
+<button class="btn btn-primary btn-sm" data-action="logout">Logout</button>
+</div>
+</div>
+<div class="mobile-nav">
+<a class="chip " href="index.html">Home</a>
+<a class="chip active" href="events.html">Events</a>
+<a class="chip " href="clubs.html">Clubs</a>
+<a class="chip " href="dashboard.html">Dashboard</a>
+<a class="chip " href="admin.html" data-admin-only>Admin</a>
+<button class="chip" data-action="logout">Logout</button>
+</div>
+</div>
+</nav>
+<main>
+<section class="section events-page-section">
+<div class="wrap">
+<div class="event-discovery">
+<div class="event-discovery-copy">
+<div class="event-discovery-icon" aria-hidden="true">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="24">
+<rect height="16" rx="2.5" width="18" x="3" y="5"></rect>
+<path d="M8 3v4M16 3v4M3 10h18"></path>
+<path d="m9 15 2 2 4-4"></path>
+</svg>
+</div>
+<div>
+<p class="eyebrow">Discover campus life</p>
+<h1>Find your next event</h1>
+<p class="event-discovery-text">Explore workshops, competitions, sports and cultural events happening across campus.</p>
+<div class="event-quick-info"><span><strong>8</strong> events to explore</span><span><strong>5</strong> registrations open</span></div>
+</div>
+</div>
+<div class="event-search-area">
+<label for="event-search">What are you looking for?</label>
+<div class="search-box">
+<svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18">
+<circle cx="11" cy="11" r="7">
+</circle>
+<path d="M21 21l-4.3-4.3">
+</path>
+</svg>
+<input aria-label="Search events" id="event-search" placeholder="Search event, category or venue..."/>
+<kbd>/</kbd>
+</div>
+<p>Try “Hackathon”, “Sports” or “Seminar Hall”</p>
+</div>
+<div class="event-filters">
+<span>Browse by category</span>
+<div class="chip-row">
+<button class="chip active" data-category="All">All events</button>
+<button class="chip" data-category="Technical">Technical</button>
+<button class="chip" data-category="Cultural">Cultural</button>
+<button class="chip" data-category="Sports">Sports</button>
+<button class="chip" data-category="Workshop">Workshop</button>
+<button class="chip" data-category="Music">Music</button>
+<button class="chip" data-category="Art">Art</button>
+<button class="chip" data-category="Seminar">Seminar</button>
+</div>
+</div>
+</div>
+<div class="event-results-head">
+<div>
+<p class="eyebrow">Upcoming &amp; recent</p>
+<h2 class="section-title">All events</h2>
+</div>
+<span class="event-results-count">8 events</span>
+</div>
+<div class="events-grid" id="events-grid">
+<article class="event-card all-event" data-capacity="120" data-category="Technical" data-date="20 Aug 2026" data-description="A 24-hour coding competition where student teams design and build working prototypes for real campus problems, judged by faculty and industry mentors." data-id="1" data-lat="30.51665" data-lng="76.65865" data-organizer="Coding Club" data-registered="87" data-requirements='["Team of 2\u20134 members", "Valid college ID required", "Own laptop required", "Basic knowledge of any programming language"]' data-time="10:00 AM – 6:00 PM (24 hrs)" data-title="TechFest Hackathon 2026" data-venue="Innovation Lab, Block A">
+<div class="event-card-top">
+<span class="tag" style="background:#ECEBFA;color:#423E85">Technical</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">TechFest Hackathon 2026</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">20 Aug 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Innovation Lab, Block A</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">87</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:72%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">33 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="1">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="500" data-category="Cultural" data-date="25 Aug 2026" data-description="The college's flagship evening of dance, drama and music, featuring performances from every department and a headline student band showcase." data-id="2" data-lat="30.51605" data-lng="76.65995" data-organizer="Cultural Committee" data-registered="412" data-requirements='["Open to all students", "Performer entries close 3 days prior", "Audience entry free with college ID"]' data-time="5:00 PM – 10:00 PM" data-title="Rhythm Nights: Cultural Fest" data-venue="Open Air Amphitheatre">
+<div class="event-card-top">
+<span class="tag" style="background:#FFE9D2;color:#B85400">Cultural</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Rhythm Nights: Cultural Fest</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">25 Aug 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Open Air Amphitheatre</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">412</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:82%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">88 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="2">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="200" data-category="Sports" data-date="02 Sep 2026" data-description="Inter-department knockout football tournament running through the day, ending with a final under floodlights." data-id="3" data-lat="30.5173" data-lng="76.6601" data-organizer="Sports Club" data-registered="150" data-requirements='["Team of 11 + 4 substitutes", "Department ID required", "Sports kit mandatory"]' data-time="8:00 AM – 4:00 PM" data-title="Campus Football Cup" data-venue="Main Sports Ground">
+<div class="event-card-top">
+<span class="tag" style="background:#DFF5EA;color:#167A55">Sports</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Campus Football Cup</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">02 Sep 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Main Sports Ground</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">150</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:75%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">50 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="3">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="80" data-category="Workshop" data-date="22 Aug 2026" data-description="A hands-on session covering the fundamentals of machine learning, ending with participants training a small model of their own." data-id="4" data-lat="30.51585" data-lng="76.6589" data-organizer="AI Club" data-registered="63" data-requirements='["Laptop with Python installed", "No prior ML experience needed"]' data-time="2:00 PM – 5:00 PM" data-title="AI &amp; ML Workshop" data-venue="Seminar Hall 2">
+<div class="event-card-top">
+<span class="tag" style="background:#FDE8E6;color:#C23D2C">Workshop</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">AI &amp; ML Workshop</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">22 Aug 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Seminar Hall 2</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">63</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:79%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">17 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="4">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="60" data-category="Art" data-date="28 Aug 2026" data-description="An open-theme on-the-spot painting competition. Materials provided; bring your own brushes if you have a preference." data-id="5" data-lat="30.5162" data-lng="76.65795" data-organizer="Fine Arts Society" data-registered="22" data-requirements='["Individual entries only", "Theme announced on the day"]' data-time="11:00 AM – 3:00 PM" data-title="Canvas &amp; Chaos: Art Competition" data-venue="Art Studio">
+<div class="event-card-top">
+<span class="tag" style="background:#E4F1FB;color:#2A6C9E">Art</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Canvas &amp; Chaos: Art Competition</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">28 Aug 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Art Studio</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">22</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:37%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">38 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="5">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="150" data-category="Music" data-date="30 Aug 2026" data-description="An evening for singers, instrumentalists and poets to take the stage. Sign up for a 5-minute slot or just come to listen." data-id="6" data-lat="30.516" data-lng="76.65995" data-organizer="Music Club" data-registered="140" data-requirements='["5-minute slot per performer", "Backing tracks accepted"]' data-time="7:00 PM – 9:30 PM" data-title="Open Mic &amp; Music Night" data-venue="Amphitheatre">
+<div class="event-card-top">
+<span class="tag" style="background:#F3E4F0;color:#8A3A78">Music</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Open Mic &amp; Music Night</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">30 Aug 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Amphitheatre</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">140</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:93%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">10 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="6">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="100" data-category="Seminar" data-date="05 Sep 2026" data-description="A guest-led session on applying design thinking to early-stage startup ideas, with a live case study from a campus-founded venture." data-id="7" data-lat="30.51565" data-lng="76.6594" data-organizer="Entrepreneurship Cell" data-registered="40" data-requirements='["Open to all years", "Notebook recommended"]' data-time="10:00 AM – 12:00 PM" data-title="Design Thinking Seminar" data-venue="Conference Room">
+<div class="event-card-top">
+<span class="tag" style="background:#F1EFE6;color:#6B6350">Seminar</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Design Thinking Seminar</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">05 Sep 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Conference Room</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">40</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:40%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">60 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="7">View details</button>
+</div>
+</article>
+<article class="event-card all-event" data-capacity="100" data-category="Technical" data-date="08 Sep 2026" data-description="A timed individual contest across three difficulty tiers, with prizes for the top scorer in each year group." data-id="8" data-lat="30.5168" data-lng="76.65895" data-organizer="Coding Club" data-registered="76" data-requirements='["Individual entry", "Laptop provided in the lab"]' data-time="9:00 AM – 1:00 PM" data-title="Code Wars: Competitive Programming" data-venue="Computer Lab 3">
+<div class="event-card-top">
+<span class="tag" style="background:#ECEBFA;color:#423E85">Technical</span>
+<span class="status-open">
+<span class="status-dot">
+</span>
+<span class="status-label">Open</span>
+</span>
+</div>
+<div>
+<div class="event-title">Code Wars: Competitive Programming</div>
+<div class="event-meta" style="margin-top:10px">
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<rect height="16" rx="2.5" width="18" x="3" y="5">
+</rect>
+<path d="M8 3v4M16 3v4M3 10h18">
+</path>
+</svg> <span class="event-date">08 Sep 2026</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z">
+</path>
+<circle cx="12" cy="9.5" r="2.4">
+</circle>
+</svg> <span class="event-venue">Computer Lab 3</span>
+</div>
+<div class="event-meta-row">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="14">
+<circle cx="9" cy="8" r="3.3">
+</circle>
+<path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20">
+</path>
+<path d="M16.5 5.2A3.3 3.3 0 0 1 16 11.6M17.8 13.9c3 .3 4.7 2.6 4.7 6.1">
+</path>
+</svg> <span class="event-registered">76</span> registered</div>
+</div>
+</div>
+<div class="cap-bar">
+<div class="cap-fill" style="width:76%">
+</div>
+</div>
+<div class="event-card-foot">
+<span class="cap-text">24 spots left</span>
+<button class="btn btn-ghost btn-sm" data-action="open-event" data-id="8">View details</button>
+</div>
+</article>
+</div>
+<div class="empty-state hidden" id="events-empty">
+<h3 style="font-size:18px;color:var(--ink)">No events match your search</h3>
+<p style="margin-top:8px;font-size:14px">Try a different keyword or clear the category filter.</p>
+</div>
+<section aria-labelledby="campus-map-title" class="events-map-panel">
+<div class="map-panel-head">
+<div>
+<p class="eyebrow">Campus map</p>
+<h3 id="campus-map-title">Where events are happening</h3>
+<p>Click a marker to see the event and open its details.</p>
+</div>
+<span class="api-badge">
+<span class="api-dot">
+</span> Live API data</span>
+</div>
+<div aria-label="Interactive campus event map" class="campus-map" id="campus-map" role="region">
+</div>
+<p class="map-note">Map markers use approximate campus coordinates for this demo.</p>
+</section>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="wrap footer-inner">
+<div>
+<div class="brand" style="color:#fff">
+<span class="brand-mark">C</span> Campus</div>
+<p style="font-size:13.5px;color:#9EA1AC;margin-top:14px;line-height:1.6;max-width:280px">The board where every fest, workshop and club on campus lives in one place — built by students, for students.</p>
+</div>
+<div>
+<h4>Platform</h4>
+<a href="events.html">Events</a>
+<a href="clubs.html">Clubs</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="admin.html">Admin</a>
+</div>
+<div>
+<h4>Explore</h4>
+<a href="events.html?category=Technical">Technical</a>
+<a href="events.html?category=Cultural">Cultural</a>
+<a href="events.html?category=Sports">Sports</a>
+<a href="events.html?category=Workshop">Workshops</a>
+</div>
+<div>
+<h4>Support</h4>
+<a href="#">Help center</a>
+<a href="#">Contact</a>
+<a href="#">Report an issue</a>
+</div>
+</div>
+<div class="wrap footer-bottom">
+<span>© 2026 Campus. A student community platform.</span>
+<span>Made for one college, built for every college.</span>
+</div>
+</footer>
+<div id="modal-root">
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+<script defer src="app.js">
+</script>
 </body>
-
 </html>
