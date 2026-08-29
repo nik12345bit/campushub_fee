@@ -3998,3 +3998,15 @@ body[data-page="dashboard"] .dash-header::after {
     grid-template-columns: 1fr;
   }
 }
+/* ===== DISABLE BACKGROUND ANIMATIONS / EFFECTS ===== */
+
+body::before,
+body::after,
+.login-page::before,
+.login-page::after,
+.bg-sparkle-layer,
+.nav::before,
+.nav::after,
+body[data-page="dashboard"] .dash-header::before {
+  display: none !important;
+}
