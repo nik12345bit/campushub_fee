@@ -175,150 +175,66 @@ const SEED_CLUBS = [
     name: "Coding Club",
     short: "CC",
     color: "#423E85",
-    type: "Technical",
-    tagline: "Build. Compete. Ship.",
     president: "Aditi Sharma",
-    vicePresident: "Arjun Malhotra",
-    facultyMentor: "Dr. Neha Kapoor",
-    contactEmail: "codingclub@campus.edu",
     members: 245,
-    memberLimit: 300,
-    founded: "2022",
-    meetingSchedule: "Friday · 4:30 PM",
-    meetingVenue: "Innovation Lab, Block A",
-    eligibility: "Open to students from every department and year.",
     about:
       "A community for students interested in programming, development and competitive coding — running weekly practice sessions and two flagship events a year.",
-    assignedWork: "Competitive coding practice, project teams, peer mentoring and hackathon preparation.",
-    activities: ["Weekly coding practice", "Project building circles", "Hackathon mentoring", "Competitive programming contests"],
-    joinRequirements: ["Interest in coding or technology", "Valid college ID", "Participate in at least one club activity each month"],
     events: ["TechFest Hackathon 2026", "Code Wars: Competitive Programming"],
-    joinOpen: true,
   },
   {
     id: 2,
     name: "Cultural Committee",
     short: "CU",
     color: "#B85400",
-    type: "Cultural",
-    tagline: "Create the moments campus remembers.",
     president: "Rohan Verma",
-    vicePresident: "Simran Kaur",
-    facultyMentor: "Prof. Kavita Bansal",
-    contactEmail: "culture@campus.edu",
     members: 180,
-    memberLimit: 240,
-    founded: "2020",
-    meetingSchedule: "Wednesday · 4:15 PM",
-    meetingVenue: "Student Activity Centre",
-    eligibility: "Open to students interested in dance, drama, music, hosting, design or event operations.",
     about:
       "Plans and runs the college's dance, drama and music events, from department-level showcases to the annual cultural fest.",
-    assignedWork: "Fest planning, stage coordination, auditions, hosting, decor and backstage operations.",
-    activities: ["Dance and drama auditions", "Fest planning", "Stage and backstage management", "Creative production"],
-    joinRequirements: ["Valid college ID", "Attend team briefings before assigned events", "Respect rehearsal and production schedules"],
     events: ["Rhythm Nights: Cultural Fest"],
-    joinOpen: true,
   },
   {
     id: 3,
     name: "Sports Club",
     short: "SP",
     color: "#167A55",
-    type: "Sports",
-    tagline: "Train together. Play for campus.",
     president: "Meera Iyer",
-    vicePresident: "Harshit Rana",
-    facultyMentor: "Mr. Aman Gill",
-    contactEmail: "sports@campus.edu",
     members: 310,
-    memberLimit: 400,
-    founded: "2019",
-    meetingSchedule: "Tuesday & Thursday · 4:30 PM",
-    meetingVenue: "Main Sports Ground",
-    eligibility: "Open to all students; competitive teams may require trials.",
     about:
       "Organises inter-department tournaments across football, cricket, basketball and athletics throughout the year.",
-    assignedWork: "Team trials, practice sessions, fixtures, tournament operations and sports volunteering.",
-    activities: ["Team trials", "Weekly practice", "Inter-department tournaments", "Sports volunteering"],
-    joinRequirements: ["Valid college ID", "Sports shoes/kit for practice", "Trials required for competitive squads"],
     events: ["Campus Football Cup"],
-    joinOpen: true,
   },
   {
     id: 4,
     name: "AI Club",
     short: "AI",
     color: "#2A6C9E",
-    type: "Academic",
-    tagline: "Learn AI by building it.",
     president: "Karan Mehta",
-    vicePresident: "Ananya Sood",
-    facultyMentor: "Dr. Ritu Sharma",
-    contactEmail: "aiclub@campus.edu",
     members: 150,
-    memberLimit: 220,
-    founded: "2023",
-    meetingSchedule: "Monday · 4:30 PM",
-    meetingVenue: "AI Lab, Block B",
-    eligibility: "Beginners are welcome; curiosity about AI, data or machine learning is enough.",
     about:
       "Focused on applied machine learning — reading groups, workshops and a student research showcase each semester.",
-    assignedWork: "ML study groups, mini-projects, paper discussions and workshop support.",
-    activities: ["ML reading group", "Hands-on model building", "Research discussions", "Peer workshops"],
-    joinRequirements: ["Valid college ID", "Bring a laptop for hands-on sessions when requested", "No prior ML experience required"],
     events: ["AI & ML Workshop"],
-    joinOpen: true,
   },
   {
     id: 5,
     name: "Fine Arts Society",
     short: "FA",
     color: "#8A3A78",
-    type: "Arts",
-    tagline: "Make campus your canvas.",
     president: "Priya Nair",
-    vicePresident: "Ishita Arora",
-    facultyMentor: "Ms. Shalini Rao",
-    contactEmail: "finearts@campus.edu",
     members: 95,
-    memberLimit: 160,
-    founded: "2021",
-    meetingSchedule: "Thursday · 4:15 PM",
-    meetingVenue: "Art Studio",
-    eligibility: "Open to beginners and experienced artists across all visual-art styles.",
     about:
       "A space for painters, sketch artists and sculptors to exhibit work and run on-campus competitions.",
-    assignedWork: "Art jams, exhibitions, campus installations, competition planning and creative workshops.",
-    activities: ["Open art jams", "Exhibitions", "Campus installations", "Technique workshops"],
-    joinRequirements: ["Valid college ID", "Bring personal tools for specialised techniques", "Portfolio not required"],
     events: ["Canvas & Chaos: Art Competition"],
-    joinOpen: true,
   },
   {
     id: 6,
     name: "Music Club",
     short: "MU",
     color: "#C23D2C",
-    type: "Cultural",
-    tagline: "Find your sound. Share the stage.",
     president: "Yash Kapoor",
-    vicePresident: "Rhea Khanna",
-    facultyMentor: "Mr. Sameer Sethi",
-    contactEmail: "music@campus.edu",
     members: 120,
-    memberLimit: 180,
-    founded: "2020",
-    meetingSchedule: "Saturday · 11:00 AM",
-    meetingVenue: "Music Room, Student Centre",
-    eligibility: "Singers, instrumentalists, producers and students who want to help with music events are welcome.",
     about:
       "Runs jam sessions, the open mic series and represents the college at inter-college music festivals.",
-    assignedWork: "Jam sessions, auditions, live-event sets, open mics and inter-college music preparation.",
-    activities: ["Jam sessions", "Open mic practice", "Band auditions", "Live performance production"],
-    joinRequirements: ["Valid college ID", "Audition only for performance teams", "General membership is open without audition"],
     events: ["Open Mic & Music Night"],
-    joinOpen: true,
   },
 ];
 const PAGE = document.body.dataset.page || "home";
@@ -419,7 +335,6 @@ function icon(name, size = 18) {
       '<circle cx="9" cy="8" r="3.3"/><path d="M2.5 20c0-3.6 2.9-6.2 6.5-6.2S15.5 16.4 15.5 20"/>',
     close: '<path d="M18 6L6 18M6 6l12 12"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
-    mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
     check: '<path d="M20 6L9 17l-5-5"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
@@ -472,51 +387,10 @@ function normalizeDb(x) {
     e.registered = realRegistrationCount(e.id, x);
   });
   x.clubs.forEach((c) => {
-    const seed = SEED_CLUBS.find((item) => Number(item.id) === Number(c.id));
-    c.type ||= seed?.type || "Student club";
-    c.short ||= seed?.short || String(c.name || "CL")
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((part) => part[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase();
-    c.color ||= seed?.color || "#423E85";
-    c.tagline ||= seed?.tagline || "Meet people, learn together and contribute to campus life.";
-    c.vicePresident ||= seed?.vicePresident || "Not assigned";
-    c.facultyMentor ||= seed?.facultyMentor || "To be announced";
-    c.contactEmail ||= seed?.contactEmail || "clubs@campus.edu";
-    c.meetingSchedule ||= seed?.meetingSchedule || "Schedule announced by the club";
-    c.meetingVenue ||= seed?.meetingVenue || "Student Activity Centre";
-    c.eligibility ||= seed?.eligibility || "Open to all enrolled students.";
-    c.founded ||= seed?.founded || "2024";
-    if (c.memberLimit === undefined || c.memberLimit === null)
-      c.memberLimit = seed?.memberLimit || 0;
-    c.memberLimit = Math.max(0, Number(c.memberLimit) || 0);
-    c.assignedWork ||= seed?.assignedWork || "Organise activities and upcoming events.";
-    if (!Array.isArray(c.activities))
-      c.activities = String(c.activities || "")
-        .split(/\n|,/)
-        .map((item) => item.trim())
-        .filter(Boolean);
-    if (!c.activities.length)
-      c.activities = structuredClone(seed?.activities || [c.assignedWork]);
-    if (!Array.isArray(c.joinRequirements))
-      c.joinRequirements = String(c.joinRequirements || "")
-        .split(/\n|,/)
-        .map((item) => item.trim())
-        .filter(Boolean);
-    if (!c.joinRequirements.length)
-      c.joinRequirements = structuredClone(
-        seed?.joinRequirements || ["Valid college ID", "Follow the club code of conduct"],
-      );
-    if (!Array.isArray(c.events))
-      c.events = String(c.events || "")
-        .split(/\n/)
-        .map((item) => item.trim())
-        .filter(Boolean);
-    if (!c.events.length && seed?.events) c.events = structuredClone(seed.events);
-    if (c.joinOpen === undefined) c.joinOpen = seed?.joinOpen !== false;
+    c.type ||= "Student club";
+    c.vicePresident ||= "Not assigned";
+    c.assignedWork ||= "Organise activities and upcoming events.";
+    c.events ||= [];
   });
   return x;
 }
@@ -772,13 +646,8 @@ document.addEventListener("click", (e) => {
     }
   }
   const club = e.target.closest('[data-action="open-club"]');
-  if (club) {
+  if (club && !e.target.closest("button")) {
     openClub(Number(club.dataset.id));
-    return;
-  }
-  const clubCardLink = e.target.closest(".club-card");
-  if (clubCardLink && !e.target.closest("button,a,input,select,textarea")) {
-    openClub(Number(clubCardLink.dataset.id));
     return;
   }
   const edit = e.target.closest('[data-action="edit-event"]');
@@ -910,7 +779,7 @@ function filterClubs() {
   const q = search.value.trim().toLowerCase();
   let shown = 0;
   $$(".clubs-grid .club-card").forEach((card) => {
-    const searchable = `${card.dataset.name || ""} ${card.dataset.about || ""} ${card.dataset.president || ""} ${card.dataset.type || ""} ${card.dataset.tagline || ""} ${card.dataset.activities || ""}`.toLowerCase();
+    const searchable = `${card.dataset.name || ""} ${card.dataset.about || ""} ${card.dataset.president || ""}`.toLowerCase();
     const show = !q || searchable.includes(q);
     card.classList.toggle("hidden", !show);
     if (show) shown++;
@@ -1154,59 +1023,57 @@ function getClub(id) {
 function clubCard(id) {
   return $(`.club-card[data-id="${id}"]`);
 }
-function makeClubCard(club) {
-  const id = Number(club.id),
-    joined = joinedClubs.has(id),
-    limit = Math.max(0, Number(club.memberLimit) || 0),
-    full = limit > 0 && Number(club.members) >= limit,
-    closed = club.joinOpen === false,
-    state = closed ? "Joining closed" : full ? "Full" : "Joining open",
-    meeting = club.meetingSchedule || "Schedule TBA",
-    venue = club.meetingVenue || "Venue TBA";
-  return `<article class="club-card ${closed || full ? "club-closed" : "club-open"}" data-action="open-club" data-id="${club.id}" data-name="${esc(club.name)}" data-about="${esc(club.about)}" data-president="${esc(club.president)}" data-type="${esc(club.type)}" data-tagline="${esc(club.tagline)}" data-activities="${esc((club.activities || []).join(" "))}" tabindex="0" role="button" aria-label="View details for ${esc(club.name)}"><span class="club-status">${state}</span><div class="club-card-head"><div class="club-icon" style="background:${esc(club.color)}">${esc(club.short)}</div><span class="tag club-type-tag">${esc(club.type)}</span></div><div><div class="club-name">${esc(club.name)}</div><div class="club-tagline">${esc(club.tagline || "Student community")}</div></div><div class="club-meta">${club.members}${limit ? `/${limit}` : ""} members · President: ${esc(club.president)}</div><div class="club-about">${esc(club.about)}</div><div class="club-quick-info"><div class="club-quick-row">${icon("clock", 14)} <span>${esc(meeting)}</span></div><div class="club-quick-row">${icon("pin", 14)} <span>${esc(venue)}</span></div></div><div class="club-card-foot"><span class="tag club-joined-badge ${joined ? "" : "hidden"}">Joined</span><button class="btn btn-ghost btn-sm" data-action="open-club" data-id="${club.id}">View details</button></div></article>`;
-}
 function syncClubs() {
-  const grid = $(".clubs-grid");
-  if (grid) {
-    grid.innerHTML = db.clubs.map(makeClubCard).join("");
-    filterClubs();
-  }
+  db.clubs.forEach((club) => {
+    $$(`.club-card[data-id="${club.id}"]`).forEach((card) => {
+      card.dataset.members = club.members;
+      card.classList.toggle("club-closed", club.joinOpen === false);
+      card.classList.toggle("club-open", club.joinOpen !== false);
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `View details for ${club.name}`);
+      $(".club-meta", card) &&
+        ($(".club-meta", card).textContent =
+          `${club.members} members · President: ${club.president}`);
+      let status = $(".club-status", card);
+      if (!status) {
+        card.insertAdjacentHTML(
+          "afterbegin",
+          '<span class="club-status"></span>',
+        );
+        status = $(".club-status", card);
+      }
+      status.textContent =
+        club.joinOpen === false ? "Joining closed" : "Joining open";
+    });
+  });
+  $$(".club-joined-badge").forEach((b) => b.classList.add("hidden"));
+  joinedClubs.forEach((id) =>
+    $$(`.club-card[data-id="${id}"] .club-joined-badge`).forEach((b) =>
+      b.classList.remove("hidden"),
+    ),
+  );
   syncAdminClubs();
-  syncAdminUsers();
 }
 function openClub(id) {
   const club = getClub(id);
   if (!club) return;
   const joined = joinedClubs.has(id),
-    limit = Math.max(0, Number(club.memberLimit) || 0),
-    full = limit > 0 && Number(club.members) >= limit,
-    closed = club.joinOpen === false,
-    status = closed ? "Joining closed" : full ? "Club full" : "Joining open",
-    activities = Array.isArray(club.activities) ? club.activities : [],
-    requirements = Array.isArray(club.joinRequirements) ? club.joinRequirements : [],
-    eventLinks = (club.events || [])
-      .map((name) => {
-        const event = eventsCache.find((item) => item.title === name);
-        return event
-          ? `<button class="list-row club-event-link" data-action="open-event" data-id="${event.id}"><span><span class="list-row-title">${esc(name)}</span><span class="list-row-sub">${esc(event.date)} · ${esc(event.venue)}</span></span>${icon("arrow", 14)}</button>`
-          : `<div class="list-row"><span class="list-row-title">${esc(name)}</span></div>`;
-      })
-      .join("") || '<p class="modal-desc">No upcoming events assigned yet.</p>',
-    membershipAction = joined
-      ? `<div class="success-box club-member-success"><span style="color:var(--green-deep)">${icon("check", 20)}</span><div><div style="font-weight:700;font-size:14px;color:var(--green-deep)">You're a member</div><div style="font-size:13px;color:var(--ink-soft);margin-top:2px">Club updates and activities will appear in your dashboard.</div></div></div><button class="btn btn-ghost btn-block" style="margin-top:12px" data-action="leave-club" data-id="${id}">Leave club</button>`
-      : closed
-        ? '<div class="registration-closed">This club is not accepting new members right now.</div>'
-        : full
-          ? '<div class="registration-closed">This club has reached its current member limit.</div>'
-          : `<button class="btn btn-marigold btn-block" id="join-club-button">Join this club</button>`;
-
+    closed = club.joinOpen === false;
   openModal(
-    `<div class="modal club-detail-modal" style="position:relative"><button class="modal-close" data-modal-close>${icon("close", 16)}</button><div class="modal-head club-modal-head"><div class="club-icon club-modal-icon" style="background:${esc(club.color)}">${esc(club.short)}</div><div class="club-modal-title"><div class="club-modal-tags"><span class="tag club-type-tag">${esc(club.type)}</span><span class="club-modal-status ${closed || full ? "is-closed" : ""}">${status}</span></div><h3>${esc(club.name)}</h3><p>${esc(club.tagline || "Student community")}</p></div></div><div class="modal-body"><div class="modal-meta-grid club-meta-grid"><div>${icon("clock", 16)}<div><small>Meetings</small><strong>${esc(club.meetingSchedule || "Schedule TBA")}</strong></div></div><div>${icon("pin", 16)}<div><small>Meeting venue</small><strong>${esc(club.meetingVenue || "Venue TBA")}</strong></div></div><div>${icon("users", 16)}<div><small>Members</small><strong>${club.members}${limit ? ` / ${limit}` : ""}${limit ? " capacity" : ""}</strong></div></div><div>${icon("users", 16)}<div><small>Faculty mentor</small><strong>${esc(club.facultyMentor || "To be announced")}</strong></div></div></div><div class="modal-section-label">About this club</div><p class="modal-desc">${esc(club.about)}</p><div class="club-detail-columns"><div><div class="modal-section-label">Leadership</div><div class="club-detail-card"><strong>President</strong><span>${esc(club.president)}</span><strong>Vice president</strong><span>${esc(club.vicePresident || "Not assigned")}</span><strong>Founded</strong><span>${esc(club.founded || "—")}</span></div></div><div><div class="modal-section-label">Who can join</div><div class="club-detail-card"><p>${esc(club.eligibility || "Open to all enrolled students.")}</p></div></div></div><div class="modal-section-label">What you'll do</div><ul class="req-list club-activity-list">${activities.map((item) => `<li>${icon("check", 14)}${esc(item)}</li>`).join("") || `<li>${icon("check", 14)}${esc(club.assignedWork)}</li>`}</ul><div class="modal-section-label">Current focus</div><p class="modal-desc">${esc(club.assignedWork)}</p><div class="modal-section-label">Joining requirements</div><ul class="req-list">${requirements.map((item) => `<li>${icon("check", 14)}${esc(item)}</li>`).join("") || `<li>${icon("check", 14)}Valid college ID</li>`}</ul><div class="modal-section-label">Upcoming events</div>${eventLinks}<div class="club-actions">${membershipAction}</div></div></div>`,
+    `<div class="modal" style="position:relative"><button class="modal-close" data-modal-close>${icon("close", 16)}</button><div class="modal-head" style="display:flex;gap:14px;align-items:center"><div class="club-icon" style="background:${club.color}">${esc(club.short)}</div><div><h3 style="font-size:22px">${esc(club.name)}</h3><p style="font-size:13px;color:var(--muted);margin-top:4px">${esc(club.type)} · ${club.members} members · ${closed ? "Joining closed" : "Joining open"}</p></div></div><div class="modal-body"><div class="modal-section-label">Leadership</div><p class="modal-desc"><strong>President:</strong> ${esc(club.president)}<br><strong>Vice president:</strong> ${esc(club.vicePresident)}</p><div class="modal-section-label">About</div><p class="modal-desc">${esc(club.about)}</p><div class="modal-section-label">Assigned work</div><p class="modal-desc">${esc(club.assignedWork)}</p><div class="modal-section-label">Upcoming events</div>${
+      club.events
+        .map((n) => {
+          const event = eventsCache.find((e) => e.title === n);
+          return event
+            ? `<button class="list-row club-event-link" data-action="open-event" data-id="${event.id}"><span class="list-row-title">${esc(n)}</span>${icon("arrow", 14)}</button>`
+            : `<div class="list-row"><span class="list-row-title">${esc(n)}</span></div>`;
+        })
+        .join("") || '<p class="modal-desc">No upcoming events assigned.</p>'
+    }${joined ? `<button class="btn btn-ghost btn-block" style="margin-top:18px" data-action="leave-club" data-id="${id}">Leave club</button>` : closed ? '<div class="registration-closed" style="margin-top:18px">Club joining is closed</div>' : `<button class="btn btn-marigold btn-block" id="join-club-button" style="margin-top:18px">Join club</button>`}</div></div>`,
   );
   $("#join-club-button")?.addEventListener("click", () => {
-    const currentLimit = Math.max(0, Number(club.memberLimit) || 0),
-      isFull = currentLimit > 0 && Number(club.members) >= currentLimit;
-    if (club.joinOpen === false || isFull || joinedClubs.has(id)) return;
+    if (club.joinOpen === false) return;
     joinedClubs.add(id);
     db.memberships[currentUser.email] = [...joinedClubs];
     club.members++;
@@ -1292,7 +1159,7 @@ function ensureAdminControls() {
     const users = $("#admin-user-rows")?.closest(".admin-table-wrap");
     users?.insertAdjacentHTML(
       "beforebegin",
-      `<div class="admin-table-wrap club-management-wrap" style="margin-top:30px"><div class="panel-title" style="margin-bottom:14px"><span>Club management</span><button class="btn btn-marigold btn-sm" data-action="create-club" type="button">Create club</button></div><form class="panel hidden club-editor-panel" id="club-editor" style="margin-bottom:18px"><input name="clubId" type="hidden"><div class="panel-title"><span id="club-editor-title">Create club</span><button class="icon-action" id="close-club-editor" type="button" aria-label="Close club editor">×</button></div><p class="club-editor-help">Add enough information for students to understand what the club does, when it meets and what they need before joining.</p><div class="form-grid club-form-grid"><div class="field"><label>Club name</label><input name="name" required placeholder="e.g. Robotics Club"></div><div class="field"><label>Club type</label><select name="type" required><option>Technical</option><option>Cultural</option><option>Sports</option><option>Academic</option><option>Arts</option><option>Social service</option><option>Entrepreneurship</option><option>Other</option></select></div><div class="field"><label>Short code</label><input name="short" maxlength="3" placeholder="e.g. RC"></div><div class="field"><label>Card colour</label><input name="color" type="color" value="#423E85"></div><div class="field field-span-2"><label>Club tagline</label><input name="tagline" required placeholder="A short line students see on the club card"></div><div class="field"><label>President</label><input name="president" required></div><div class="field"><label>Vice president</label><input name="vicePresident" required></div><div class="field"><label>Faculty mentor / coordinator</label><input name="facultyMentor" required></div><div class="field"><label>Contact email</label><input name="contactEmail" type="email" required placeholder="club@campus.edu"></div><div class="field"><label>Meeting schedule</label><input name="meetingSchedule" required placeholder="Friday · 4:30 PM"></div><div class="field"><label>Meeting venue</label><input name="meetingVenue" required placeholder="Student Activity Centre"></div><div class="field"><label>Founded year</label><input name="founded" inputmode="numeric" maxlength="4" placeholder="2024"></div><div class="field"><label>Member limit</label><input name="memberLimit" type="number" min="0" step="1" value="0"><small>Use 0 for no fixed limit.</small></div><div class="field"><label>Club joining</label><select name="joinOpen"><option value="true">Open</option><option value="false">Closed</option></select></div><div class="field"><label>Who can join?</label><input name="eligibility" required placeholder="e.g. Open to all years"></div><div class="field field-span-2"><label>About the club</label><textarea name="about" rows="4" required placeholder="Purpose, community and what makes the club useful..."></textarea></div><div class="field field-span-2"><label>Current focus / assigned work</label><textarea name="assignedWork" rows="3" required placeholder="What the club is currently working on"></textarea></div><div class="field"><label>Activities <span>(one per line)</span></label><textarea name="activities" rows="5" required placeholder="Weekly practice&#10;Project teams&#10;Competitions"></textarea></div><div class="field"><label>Joining requirements <span>(one per line)</span></label><textarea name="joinRequirements" rows="5" required placeholder="Valid college ID&#10;Attend orientation"></textarea></div><div class="field field-span-2"><label>Upcoming event titles <span>(one per line, optional)</span></label><textarea name="events" rows="3" placeholder="Use the exact event title so students can open it from club details"></textarea></div></div><button class="btn btn-primary" style="margin-top:16px" type="submit">Save club</button></form><table><thead><tr><th>Club</th><th>Type</th><th>Leadership</th><th>Members</th><th>Meeting</th><th>Status</th><th>Actions</th></tr></thead><tbody id="admin-club-rows"></tbody></table></div>`,
+      `<div class="admin-table-wrap" style="margin-top:30px"><div class="panel-title" style="margin-bottom:14px">Club management <button class="btn btn-marigold btn-sm" data-action="create-club" type="button">Create club</button></div><form class="panel hidden" id="club-editor" style="margin-bottom:18px"><input name="clubId" type="hidden"><div class="panel-title"><span id="club-editor-title">Create club</span><button class="icon-action" id="close-club-editor" type="button">×</button></div><div class="form-grid"><div class="field"><label>Club name</label><input name="name" required></div><div class="field"><label>Club type</label><select name="type" required><option>Technical</option><option>Cultural</option><option>Sports</option><option>Academic</option><option>Arts</option><option>Social service</option></select></div><div class="field"><label>President</label><input name="president" required></div><div class="field"><label>Vice president</label><input name="vicePresident" required></div><div class="field"><label>Assigned work</label><textarea name="assignedWork" rows="3" required></textarea></div><div class="field"><label>About</label><textarea name="about" rows="3" required></textarea></div></div><button class="btn btn-primary" style="margin-top:16px" type="submit">Save club</button></form><table><thead><tr><th>Club</th><th>Type</th><th>President</th><th>Vice president</th><th>Assigned work</th><th>Actions</th></tr></thead><tbody id="admin-club-rows"></tbody></table></div>`,
     );
     initClubAdmin();
     syncAdminClubs();
@@ -1444,16 +1311,17 @@ function initAdmin() {
   });
 }
 
-function linesToList(value) {
-  return String(value || "")
-    .split(/\r?\n/)
-    .map((item) => item.trim())
-    .filter(Boolean);
-}
 function initClubAdmin() {
   const form = $("#club-editor");
   if (!form || form.dataset.ready) return;
   form.dataset.ready = "true";
+  if (!form.elements.joinOpen)
+    form.elements.about
+      .closest(".field")
+      .insertAdjacentHTML(
+        "beforebegin",
+        '<div class="field"><label>Club joining</label><select name="joinOpen"><option value="true">Open</option><option value="false">Closed</option></select></div>',
+      );
   $("#close-club-editor")?.addEventListener("click", () =>
     form.classList.add("hidden"),
   );
@@ -1461,43 +1329,29 @@ function initClubAdmin() {
     e.preventDefault();
     const f = e.currentTarget,
       id = Number(f.clubId.value),
-      generatedShort = f.name.value
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((part) => part[0])
-        .join("")
-        .slice(0, 2)
-        .toUpperCase(),
       data = {
         name: f.name.value.trim(),
         type: f.type.value,
-        short: (f.short.value.trim() || generatedShort || "CL").slice(0, 3).toUpperCase(),
-        color: f.color.value || "#423E85",
-        tagline: f.tagline.value.trim(),
         president: f.president.value.trim(),
         vicePresident: f.vicePresident.value.trim(),
-        facultyMentor: f.facultyMentor.value.trim(),
-        contactEmail: f.contactEmail.value.trim().toLowerCase(),
-        meetingSchedule: f.meetingSchedule.value.trim(),
-        meetingVenue: f.meetingVenue.value.trim(),
-        founded: f.founded.value.trim(),
-        memberLimit: Math.max(0, Number(f.memberLimit.value) || 0),
-        eligibility: f.eligibility.value.trim(),
         assignedWork: f.assignedWork.value.trim(),
         about: f.about.value.trim(),
-        activities: linesToList(f.activities.value),
-        joinRequirements: linesToList(f.joinRequirements.value),
-        events: linesToList(f.events.value),
         joinOpen: f.joinOpen.value === "true",
       };
     if (id) {
-      const club = getClub(id);
-      if (club) Object.assign(club, data);
+      Object.assign(getClub(id), data);
     } else {
       db.clubs.push({
         id: Date.now(),
+        short: data.name
+          .split(/\s+/)
+          .map((x) => x[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase(),
+        color: "#423E85",
         members: 0,
+        events: [],
         ...data,
       });
     }
@@ -1513,48 +1367,27 @@ function openClubEditor(id = null) {
   form.clubId.value = id || "";
   $("#club-editor-title").textContent = id ? "Edit club" : "Create club";
   const club = id ? getClub(id) : null;
-  if (club) {
+  if (club)
     [
       "name",
       "type",
-      "short",
-      "color",
-      "tagline",
       "president",
       "vicePresident",
-      "facultyMentor",
-      "contactEmail",
-      "meetingSchedule",
-      "meetingVenue",
-      "founded",
-      "memberLimit",
-      "eligibility",
       "assignedWork",
       "about",
-    ].forEach((key) => {
-      if (form.elements[key]) form.elements[key].value = club[key] ?? "";
-    });
-    form.elements.activities.value = (club.activities || []).join("\n");
-    form.elements.joinRequirements.value = (club.joinRequirements || []).join("\n");
-    form.elements.events.value = (club.events || []).join("\n");
-  } else {
-    form.elements.color.value = "#423E85";
-    form.elements.memberLimit.value = "0";
-  }
+    ].forEach((k) => (form.elements[k].value = club[k] || ""));
   form.elements.joinOpen.value = String(club?.joinOpen !== false);
   form.classList.remove("hidden");
-  form.scrollIntoView({ behavior: "smooth", block: "start" });
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 function syncAdminClubs() {
   const body = $("#admin-club-rows");
   if (!body) return;
   body.innerHTML = db.clubs
-    .map((club) => {
-      const limit = Math.max(0, Number(club.memberLimit) || 0),
-        full = limit > 0 && Number(club.members) >= limit,
-        status = club.joinOpen === false ? "Closed" : full ? "Full" : "Open";
-      return `<tr><td><div class="admin-club-name"><span class="admin-club-dot" style="background:${esc(club.color)}"></span><div><strong>${esc(club.name)}</strong><small>${esc(club.tagline || "")}</small></div></div></td><td>${esc(club.type)}</td><td><strong>${esc(club.president)}</strong><small class="admin-cell-sub">VP: ${esc(club.vicePresident)}</small></td><td>${club.members}${limit ? `/${limit}` : ""}</td><td><strong>${esc(club.meetingSchedule || "TBA")}</strong><small class="admin-cell-sub">${esc(club.meetingVenue || "")}</small></td><td><span class="admin-club-status ${status.toLowerCase()}">${status}</span></td><td><div class="table-actions"><button class="icon-action" data-action="edit-club" data-id="${club.id}" aria-label="Edit ${esc(club.name)}">${icon("edit", 14)}</button><button class="icon-action danger" data-action="delete-club" data-id="${club.id}" aria-label="Delete ${esc(club.name)}">${icon("trash", 14)}</button></div></td></tr>`;
-    })
+    .map(
+      (c) =>
+        `<tr><td><strong>${esc(c.name)}</strong></td><td>${esc(c.type)}</td><td>${esc(c.president)}</td><td>${esc(c.vicePresident)}</td><td style="max-width:260px">${esc(c.assignedWork)}</td><td><div class="table-actions"><button class="icon-action" data-action="edit-club" data-id="${c.id}" aria-label="Edit club">${icon("edit", 14)}</button><button class="icon-action danger" data-action="delete-club" data-id="${c.id}" aria-label="Delete club">${icon("trash", 14)}</button></div></td></tr>`,
+    )
     .join("");
 }
 function deleteClub(id) {
