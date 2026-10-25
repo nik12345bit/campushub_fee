@@ -1,0 +1,3 @@
+/* React migration compatibility layer */
+.legacy-page { min-height: 100vh; }
+/* The original site used .html links; Vite's SPA fallback maps them to React page components. */
