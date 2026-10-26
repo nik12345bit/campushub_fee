@@ -1625,13 +1625,14 @@ function focusEventOnMap(id) {
   const event = getEvent(id);
   if (!event) return;
   if (PAGE !== "events") {
-    location.href = `events.html?focus=${id}`;
+    location.href = `/events?focus=${id}`;
     return;
   }
   closeModal();
   const target = $("#campus-map"),
     panel = target?.closest(".events-map-panel");
   if (panel) {
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
     panel.classList.add("map-expanded");
     if (!panel.querySelector('[data-action="close-map"]'))
       panel.insertAdjacentHTML(
