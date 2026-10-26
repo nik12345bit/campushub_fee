@@ -1,0 +1,9 @@
+/* Additive styles only: the existing Campus Connect design remains the visual source of truth. */
+.react-app-feedback { position: fixed; z-index: 10050; right: 18px; bottom: 18px; display: grid; gap: 10px; max-width: min(420px, calc(100vw - 36px)); pointer-events: none; }
+.react-toast { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 13px 16px; border-radius: 12px; color: var(--ink, #24242b); background: #fff; border: 1px solid var(--line, #e5e5e9); box-shadow: 0 12px 36px rgba(20,20,30,.16); font-size: 13.5px; pointer-events: auto; }
+.react-toast button { border: 0; background: transparent; color: inherit; font-size: 20px; cursor: pointer; line-height: 1; }
+.react-toast-success { border-left: 4px solid #167a55; }
+.react-toast-error { border-left: 4px solid #b42318; }
+.react-toast-info { border-left: 4px solid #423e85; }
+.react-tabs { display: grid; gap: 14px; }
+.react-tab-panel { min-width: 0; }

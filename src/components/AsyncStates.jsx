@@ -1,0 +1,4 @@
+import React from "react";
+export function LoadingState({ label = "Loading…" }) { return <div className="empty-state" role="status" aria-live="polite">{label}</div>; }
+export function ErrorState({ message = "Something went wrong", onRetry }) { return <div className="empty-state" role="alert"><p>{message}</p>{onRetry && <button className="btn btn-ghost" onClick={onRetry} type="button">Try again</button>}</div>; }
+export function Pagination({ page, totalPages, onPageChange }) { if (totalPages <= 1) return null; return <nav className="chip-row" aria-label="Pagination"><button className="chip" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>Previous</button><span aria-live="polite">Page {page} of {totalPages}</span><button className="chip" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>Next</button></nav>; }

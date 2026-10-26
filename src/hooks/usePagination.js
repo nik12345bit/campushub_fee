@@ -1,0 +1,2 @@
+import { useMemo, useState } from "react";
+export default function usePagination(items, pageSize = 8) { const [page, setPage] = useState(1); const totalPages = Math.max(1, Math.ceil(items.length / pageSize)); const currentPage = Math.min(page, totalPages); const pageItems = useMemo(() => items.slice((currentPage - 1) * pageSize, currentPage * pageSize), [items, currentPage, pageSize]); return { page: currentPage, totalPages, pageItems, setPage, next: () => setPage(p => Math.min(totalPages, p + 1)), previous: () => setPage(p => Math.max(1, p - 1)) }; }

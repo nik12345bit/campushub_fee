@@ -916,8 +916,23 @@ function closeModal() {
   const root = $("#modal-root");
   if (root) root.innerHTML = "";
 }
+function ensureEnrollmentNumber(user = currentUser) {
+  if (!user) return "";
+  if (!user.enrollmentNo) {
+    // Generate a unique student enrollment ID after email OTP verification.
+    const year = new Date().getFullYear();
+    const suffix = `${Date.now().toString().slice(-6)}${Math.floor(Math.random() * 90 + 10)}`;
+    user.enrollmentNo = `CC-${year}-${suffix}`;
+    const savedUser = db.users.find((u) => u.email === user.email);
+    if (savedUser) savedUser.enrollmentNo = user.enrollmentNo;
+    saveDb();
+  }
+  return user.enrollmentNo;
+}
 function successBox(id) {
-  return `<div class="success-box"><span style="color:var(--green-deep)">${icon("check", 20)}</span><div><div style="font-weight:700;font-size:14px;color:var(--green-deep)">You're registered</div><div style="font-size:13px;color:var(--ink-soft);margin-top:2px">Saved in this browser using localStorage.</div></div></div><button class="btn btn-ghost btn-block" style="margin-top:12px" data-action="cancel-registration" data-id="${id}">Cancel registration</button>`;
+  const details = db.registrationDetails?.[currentUser.email]?.[id] || {};
+  const enrollment = details.enrollment || currentUser.enrollmentNo || "Generated after email verification";
+  return `<div class="success-box"><span style="color:var(--green-deep)">${icon("check", 20)}</span><div><div style="font-weight:700;font-size:14px;color:var(--green-deep)">You're registered</div><div style="font-size:13px;color:var(--ink-soft);margin-top:2px">Registration saved in this browser.</div><div style="font-size:13px;margin-top:8px"><strong>Enrollment number:</strong> <span>${esc(enrollment)}</span></div></div></div><button class="btn btn-ghost btn-block" style="margin-top:12px" data-action="cancel-registration" data-id="${id}">Cancel registration</button>`;
 }
 function openEvent(id) {
   // Opening event details should always close the expanded map first.
@@ -939,8 +954,9 @@ function openEvent(id) {
 function showRegistrationForm(id) {
   const area = $("#event-registration-area");
   if (!area) return;
-  area.innerHTML = `<form id="registration-form"><div class="form-grid"><div class="field"><label>Full name</label><input name="name" required value="${esc(currentUser.name)}"></div><div class="field"><label>Email</label><input id="reg-email" name="email" required type="email" value="${esc(currentUser.email)}"></div><div class="field"><label>Enrollment number</label><input id="reg-enrollment" name="enrollment" required disabled placeholder="Verify email to unlock"></div><div class="field"><label>Phone</label><input name="phone" required pattern="[0-9]{10}"></div><div class="field"><label>Department</label><input name="department" required></div><div class="field"><label>Year</label><select name="year"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div></div><div class="otp-box" id="otp-box"><button class="btn btn-ghost btn-sm" type="button" id="send-otp-btn">${icon("check", 14)} Send OTP to verify email</button><p class="otp-hint">We'll verify your email before unlocking the enrollment number field.</p></div><button class="btn btn-marigold btn-block" style="margin-top:16px" type="submit" id="confirm-reg-btn" disabled>Verify email to continue</button></form>`;
+  area.innerHTML = `<form id="registration-form"><div class="form-grid"><div class="field"><label>Full name</label><input name="name" required value="${esc(currentUser.name)}"></div><div class="field"><label>Email</label><input id="reg-email" name="email" required type="email" value="${esc(currentUser.email)}"></div><div class="field"><label>Enrollment number (generated after OTP)</label><input id="reg-enrollment" name="enrollment" required readonly placeholder="Verify email to generate"></div><div class="field"><label>Phone</label><input name="phone" required pattern="[0-9]{10}"></div><div class="field"><label>Department</label><input name="department" required></div><div class="field"><label>Year</label><select name="year"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div></div><div class="otp-box" id="otp-box"><button class="btn btn-ghost btn-sm" type="button" id="send-otp-btn">${icon("check", 14)} Send OTP to verify email</button><p class="otp-hint">Verify your email to automatically generate your enrollment number.</p></div><button class="btn btn-marigold btn-block" style="margin-top:16px" type="submit" id="confirm-reg-btn" disabled>Verify email to continue</button></form>`;
   let sentOtp = null;
+  let emailVerified = false;
   $("#send-otp-btn").addEventListener("click", () => {
     const emailVal = $("#reg-email").value.trim();
     if (!emailVal) {
@@ -952,12 +968,13 @@ function showRegistrationForm(id) {
     $("#verify-otp-btn").addEventListener("click", () => {
       const val = $("#otp-input").value.trim();
       if (val === sentOtp) {
-        $("#reg-enrollment").disabled = false;
-        $("#reg-enrollment").placeholder = "";
+        emailVerified = true;
+        const enrollmentNo = ensureEnrollmentNumber(currentUser);
+        $("#reg-enrollment").value = enrollmentNo;
         $("#confirm-reg-btn").disabled = false;
         $("#confirm-reg-btn").textContent = "Confirm registration";
         $("#otp-box").innerHTML =
-          `<p class="otp-hint" style="color:var(--green-deep)">${icon("check", 14)} Email verified — enrollment number unlocked.</p>`;
+          `<p class="otp-hint" style="color:var(--green-deep)">${icon("check", 14)} Email verified — your enrollment number has been generated.</p><p class="otp-hint"><strong>Your enrollment number: ${esc(enrollmentNo)}</strong></p>`;
       } else {
         $("#otp-error").classList.remove("hidden");
       }
@@ -965,10 +982,13 @@ function showRegistrationForm(id) {
   });
   $("#registration-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    registerForEvent(
-      id,
-      Object.fromEntries(new FormData(e.currentTarget).entries()),
-    );
+    if (!emailVerified) {
+      alert("Please verify your email with the OTP first.");
+      return;
+    }
+    const details = Object.fromEntries(new FormData(e.currentTarget).entries());
+    details.enrollment = ensureEnrollmentNumber(currentUser);
+    registerForEvent(id, details);
     area.innerHTML = successBox(id);
   });
 }
@@ -1027,8 +1047,9 @@ function syncClubs() {
   db.clubs.forEach((club) => {
     $$(`.club-card[data-id="${club.id}"]`).forEach((card) => {
       card.dataset.members = club.members;
-      card.classList.toggle("club-closed", club.joinOpen === false);
-      card.classList.toggle("club-open", club.joinOpen !== false);
+      const registrationStatus = getClubRegistrationStatus(club);
+      card.classList.toggle("club-closed", registrationStatus.state !== "open");
+      card.classList.toggle("club-open", registrationStatus.state === "open");
       card.tabIndex = 0;
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", `View details for ${club.name}`);
@@ -1043,8 +1064,7 @@ function syncClubs() {
         );
         status = $(".club-status", card);
       }
-      status.textContent =
-        club.joinOpen === false ? "Joining closed" : "Joining open";
+      status.textContent = registrationStatus.label;
     });
   });
   $$(".club-joined-badge").forEach((b) => b.classList.add("hidden"));
@@ -1055,39 +1075,62 @@ function syncClubs() {
   );
   syncAdminClubs();
 }
+function getClubRegistrationStatus(club, now = new Date()) {
+  if (club.joinOpen === false) return { state: "closed", label: "Joining closed by admin" };
+  const start = club.registrationStart ? new Date(club.registrationStart) : null;
+  const end = club.registrationDeadline ? new Date(club.registrationDeadline) : null;
+  if (start && !Number.isNaN(start.getTime()) && now < start) return { state: "upcoming", label: `Registration opens ${start.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}` };
+  if (end && !Number.isNaN(end.getTime()) && now > end) return { state: "closed", label: `Registration closed ${end.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}` };
+  return { state: "open", label: end && !Number.isNaN(end.getTime()) ? `Registration closes ${end.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}` : "Registration open" };
+}
 function openClub(id) {
   const club = getClub(id);
   if (!club) return;
-  const joined = joinedClubs.has(id),
-    closed = club.joinOpen === false;
+  const joined = joinedClubs.has(id), registrationStatus = getClubRegistrationStatus(club), closed = registrationStatus.state !== "open";
   openModal(
-    `<div class="modal" style="position:relative"><button class="modal-close" data-modal-close>${icon("close", 16)}</button><div class="modal-head" style="display:flex;gap:14px;align-items:center"><div class="club-icon" style="background:${club.color}">${esc(club.short)}</div><div><h3 style="font-size:22px">${esc(club.name)}</h3><p style="font-size:13px;color:var(--muted);margin-top:4px">${esc(club.type)} · ${club.members} members · ${closed ? "Joining closed" : "Joining open"}</p></div></div><div class="modal-body"><div class="modal-section-label">Leadership</div><p class="modal-desc"><strong>President:</strong> ${esc(club.president)}<br><strong>Vice president:</strong> ${esc(club.vicePresident)}</p><div class="modal-section-label">About</div><p class="modal-desc">${esc(club.about)}</p><div class="modal-section-label">Assigned work</div><p class="modal-desc">${esc(club.assignedWork)}</p><div class="modal-section-label">Upcoming events</div>${
-      club.events
-        .map((n) => {
-          const event = eventsCache.find((e) => e.title === n);
-          return event
-            ? `<button class="list-row club-event-link" data-action="open-event" data-id="${event.id}"><span class="list-row-title">${esc(n)}</span>${icon("arrow", 14)}</button>`
-            : `<div class="list-row"><span class="list-row-title">${esc(n)}</span></div>`;
-        })
-        .join("") || '<p class="modal-desc">No upcoming events assigned.</p>'
-    }${joined ? `<button class="btn btn-ghost btn-block" style="margin-top:18px" data-action="leave-club" data-id="${id}">Leave club</button>` : closed ? '<div class="registration-closed" style="margin-top:18px">Club joining is closed</div>' : `<button class="btn btn-marigold btn-block" id="join-club-button" style="margin-top:18px">Join club</button>`}</div></div>`,
+    `<div class="modal" style="position:relative"><button class="modal-close" data-modal-close>${icon("close", 16)}</button><div class="modal-head" style="display:flex;gap:14px;align-items:center"><div class="club-icon" style="background:${club.color}">${esc(club.short)}</div><div><h3 style="font-size:22px">${esc(club.name)}</h3><p style="font-size:13px;color:var(--muted);margin-top:4px">${esc(club.type)} · ${club.members} members · ${esc(registrationStatus.label)}</p></div></div><div class="modal-body"><div class="modal-section-label">Leadership</div><p class="modal-desc"><strong>President:</strong> ${esc(club.president)}<br><strong>Vice president:</strong> ${esc(club.vicePresident)}</p><div class="modal-section-label">About</div><p class="modal-desc">${esc(club.about)}</p><div class="modal-section-label">Assigned work</div><p class="modal-desc">${esc(club.assignedWork)}</p><div class="modal-section-label">Upcoming events</div>${club.events.map((n) => { const event = eventsCache.find((e) => e.title === n); return event ? `<button class="list-row club-event-link" data-action="open-event" data-id="${event.id}"><span class="list-row-title">${esc(n)}</span>${icon("arrow", 14)}</button>` : `<div class="list-row"><span class="list-row-title">${esc(n)}</span></div>`; }).join("") || '<p class="modal-desc">No upcoming events assigned.</p>'}${joined ? `<button class="btn btn-ghost btn-block" style="margin-top:18px" data-action="leave-club" data-id="${id}">Leave club</button>` : closed ? `<div class="registration-closed" style="margin-top:18px">${esc(registrationStatus.label)}</div>` : `<button class="btn btn-marigold btn-block" id="join-club-button" style="margin-top:18px" type="button">Join club</button>`}</div></div>`
   );
   $("#join-club-button")?.addEventListener("click", () => {
-    if (club.joinOpen === false) return;
-    joinedClubs.add(id);
-    db.memberships[currentUser.email] = [...joinedClubs];
-    club.members++;
-    addNotification(currentUser.email, {
-      title: "Club joined",
-      message: `You joined "${club.name}".`,
-      refType: "club",
-      refId: id,
+    const latestStatus = getClubRegistrationStatus(club);
+    if (latestStatus.state !== "open") { alert(latestStatus.label); openClub(id); return; }
+    const body = $(".modal .modal-body");
+    if (!body) return;
+    body.innerHTML = `<div class="modal-section-label">Club membership form</div><p class="modal-desc">Fill in your details and verify your email before joining ${esc(club.name)}.</p><form id="club-join-form" novalidate><div class="field"><label for="club-join-name">Full name</label><input id="club-join-name" name="name" value="${esc(currentUser?.name || "")}" required autocomplete="name"></div><div class="field"><label for="club-join-email">College email</label><input id="club-join-email" name="email" type="email" value="${esc(currentUser?.email || "")}" required autocomplete="email"></div><div class="field"><label for="club-join-phone">Phone number</label><input id="club-join-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit phone number" required></div><div class="field"><label for="club-join-roll">Roll / student ID</label><input id="club-join-roll" name="rollNo" value="${esc(currentUser?.rollNo || "")}" required></div><div class="form-grid"><div class="field"><label for="club-join-branch">Branch</label><select id="club-join-branch" name="branch" required><option value="">Select branch</option>${["CSE","CSE (AI & ML)","CSE (Cyber Security)","ECE","Mechanical","Civil","BCA","MCA"].map(b=>`<option ${currentUser?.branch===b?"selected":""}>${b}</option>`).join("")}</select></div><div class="field"><label for="club-join-semester">Semester</label><select id="club-join-semester" name="semester" required><option value="">Select semester</option>${[1,2,3,4,5,6,7,8].map(n=>`<option ${Number(currentUser?.semester)===n?"selected":""} value="${n}">Semester ${n}</option>`).join("")}</select></div><div class="field"><label for="club-join-year">Year</label><select id="club-join-year" name="year" required><option value="">Select year</option>${[1,2,3,4].map(n=>`<option ${Number(currentUser?.year)===n?"selected":""} value="${n}">${n}${n===1?"st":n===2?"nd":n===3?"rd":"th"} Year</option>`).join("")}</select></div></div><div class="field" id="club-otp-area"><button class="btn btn-ghost btn-block" type="button" id="club-send-otp">Send email OTP</button><small id="club-otp-hint" style="display:block;margin-top:8px;color:var(--muted)">Verify your email to complete membership.</small></div><div class="field hidden" id="club-otp-field"><label for="club-join-otp">Email OTP</label><input id="club-join-otp" name="otp" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit OTP"><small id="club-demo-otp" style="display:block;margin-top:6px;color:var(--muted)"></small></div><button class="btn btn-marigold btn-block" type="submit" id="club-join-submit" disabled>Verify OTP & join club</button><button class="btn btn-ghost btn-block" type="button" id="club-form-back" style="margin-top:8px">Back to club details</button></form>`;
+    let generatedOtp = "";
+    const form = $("#club-join-form");
+    const sendOtp = $("#club-send-otp");
+    sendOtp?.addEventListener("click", () => {
+      const email = form.elements.email.value.trim();
+      if (!form.elements.name.value.trim() || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^[0-9]{10}$/.test(form.elements.phone.value.trim()) || !form.elements.rollNo.value.trim() || !form.elements.branch.value || !form.elements.semester.value || !form.elements.year.value) {
+        alert("Please complete all membership details and enter a valid email and 10-digit phone number first."); return;
+      }
+      generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
+      $("#club-otp-field")?.classList.remove("hidden");
+      $("#club-demo-otp").textContent = `Demo OTP: ${generatedOtp} (email delivery is not configured)`;
+      $("#club-otp-hint").textContent = `OTP generated for ${email}.`;
+      sendOtp.disabled = true; sendOtp.textContent = "OTP generated";
+      $("#club-join-otp")?.focus();
     });
-    saveDb();
-    syncClubs();
-    updateDashboard();
-    updateNotifBadge();
-    openClub(id);
+    $("#club-join-otp")?.addEventListener("input", (e) => {
+      $("#club-join-submit").disabled = e.target.value.trim() !== generatedOtp || !generatedOtp;
+    });
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!generatedOtp || form.elements.otp.value.trim() !== generatedOtp) { alert("Please enter the correct OTP first."); return; }
+      const latestStatus = getClubRegistrationStatus(club);
+      if (latestStatus.state !== "open") { alert(latestStatus.label); openClub(id); return; }
+      if (joinedClubs.has(id)) { openClub(id); return; }
+      const details = { name: form.elements.name.value.trim(), email: form.elements.email.value.trim(), phone: form.elements.phone.value.trim(), rollNo: form.elements.rollNo.value.trim(), branch: form.elements.branch.value, semester: form.elements.semester.value, year: form.elements.year.value, verified: true, enrollmentNo: currentUser?.enrollmentNo || `CC${new Date().getFullYear()}${String(Date.now()).slice(-6)}` };
+      db.membershipDetails ||= {};
+      db.membershipDetails[currentUser.email] ||= {};
+      db.membershipDetails[currentUser.email][id] = details;
+      currentUser.enrollmentNo ||= details.enrollmentNo;
+      joinedClubs.add(id); db.memberships[currentUser.email] = [...joinedClubs]; club.members++;
+      addNotification(currentUser.email, { title: "Club joined", message: `You joined "${club.name}". Enrollment: ${details.enrollmentNo}`, refType: "club", refId: id });
+      saveDb(); syncClubs(); updateDashboard(); updateNotifBadge();
+      openModal(`<div class="modal" style="position:relative"><button class="modal-close" data-modal-close>${icon("close",16)}</button><div class="modal-section-label">Membership confirmed</div><h3 style="font-size:22px;margin:10px 0">You're in ${esc(club.name)}!</h3><p class="modal-desc">Your details have been saved and your email OTP verified.</p><div class="list-row"><span class="list-row-title">Enrollment number</span><strong>${esc(details.enrollmentNo)}</strong></div><div class="list-row"><span class="list-row-title">Club</span><strong>${esc(club.name)}</strong></div><button class="btn btn-marigold btn-block" data-modal-close style="margin-top:18px">Done</button></div>`);
+    });
+    $("#club-form-back")?.addEventListener("click", () => openClub(id));
   });
 }
 function leaveClub(id) {
@@ -1125,7 +1168,7 @@ function updateDashboard() {
         .map((id) => {
           const e = getEvent(id);
           return e
-            ? `<div class="list-row"><div><div class="list-row-title">${esc(e.title)}</div><div class="list-row-sub">${esc(e.date)} · ${esc(e.venue)}</div></div><button class="btn btn-ghost btn-sm" data-action="open-event" data-id="${id}">View</button></div>`
+            ? `<div class="list-row"><div><div class="list-row-title">${esc(e.title)}</div><div class="list-row-sub">${esc(e.date)} · ${esc(e.venue)}</div><div class="list-row-sub"><strong>Enrollment:</strong> ${esc(db.registrationDetails?.[currentUser.email]?.[id]?.enrollment || currentUser.enrollmentNo || "Not generated")}</div></div><button class="btn btn-ghost btn-sm" data-action="open-event" data-id="${id}">View</button></div>`
             : "";
         })
         .join("") ||
@@ -1159,7 +1202,7 @@ function ensureAdminControls() {
     const users = $("#admin-user-rows")?.closest(".admin-table-wrap");
     users?.insertAdjacentHTML(
       "beforebegin",
-      `<div class="admin-table-wrap" style="margin-top:30px"><div class="panel-title" style="margin-bottom:14px">Club management <button class="btn btn-marigold btn-sm" data-action="create-club" type="button">Create club</button></div><form class="panel hidden" id="club-editor" style="margin-bottom:18px"><input name="clubId" type="hidden"><div class="panel-title"><span id="club-editor-title">Create club</span><button class="icon-action" id="close-club-editor" type="button">×</button></div><div class="form-grid"><div class="field"><label>Club name</label><input name="name" required></div><div class="field"><label>Club type</label><select name="type" required><option>Technical</option><option>Cultural</option><option>Sports</option><option>Academic</option><option>Arts</option><option>Social service</option></select></div><div class="field"><label>President</label><input name="president" required></div><div class="field"><label>Vice president</label><input name="vicePresident" required></div><div class="field"><label>Assigned work</label><textarea name="assignedWork" rows="3" required></textarea></div><div class="field"><label>About</label><textarea name="about" rows="3" required></textarea></div></div><button class="btn btn-primary" style="margin-top:16px" type="submit">Save club</button></form><table><thead><tr><th>Club</th><th>Type</th><th>President</th><th>Vice president</th><th>Assigned work</th><th>Actions</th></tr></thead><tbody id="admin-club-rows"></tbody></table></div>`,
+      `<div class="admin-table-wrap" style="margin-top:30px"><div class="panel-title" style="margin-bottom:14px">Club management <button class="btn btn-marigold btn-sm" data-action="create-club" type="button">Create club</button></div><form class="panel hidden" id="club-editor" style="margin-bottom:18px"><input name="clubId" type="hidden"><div class="panel-title"><span id="club-editor-title">Create club</span><button class="icon-action" id="close-club-editor" type="button">×</button></div><div class="form-grid"><div class="field"><label>Club name</label><input name="name" required></div><div class="field"><label>Club type</label><select name="type" required><option>Technical</option><option>Cultural</option><option>Sports</option><option>Academic</option><option>Arts</option><option>Social service</option></select></div><div class="field"><label>President</label><input name="president" required></div><div class="field"><label>Vice president</label><input name="vicePresident" required></div><div class="field"><label>Assigned work</label><textarea name="assignedWork" rows="3" required></textarea></div><div class="field"><label>About</label><textarea name="about" rows="3" required></textarea></div><div class="field"><label>Registration starts</label><input name="registrationStart" type="datetime-local"><small style="display:block;margin-top:6px;color:var(--muted)">Leave blank to allow joining immediately.</small></div><div class="field"><label>Registration ends</label><input name="registrationDeadline" type="datetime-local"><small style="display:block;margin-top:6px;color:var(--muted)">Leave blank for no automatic closing date.</small></div></div><button class="btn btn-primary" style="margin-top:16px" type="submit">Save club</button></form><table><thead><tr><th>Club</th><th>Type</th><th>President</th><th>Vice president</th><th>Assigned work</th><th>Actions</th></tr></thead><tbody id="admin-club-rows"></tbody></table></div>`,
     );
     initClubAdmin();
     syncAdminClubs();
@@ -1328,14 +1371,17 @@ function initClubAdmin() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const f = e.currentTarget,
-      id = Number(f.clubId.value),
-      data = {
+      id = Number(f.clubId.value);
+    if (f.registrationStart.value && f.registrationDeadline.value && f.registrationDeadline.value <= f.registrationStart.value) { alert("Registration end must be after the start date."); return; }
+    const data = {
         name: f.name.value.trim(),
         type: f.type.value,
         president: f.president.value.trim(),
         vicePresident: f.vicePresident.value.trim(),
         assignedWork: f.assignedWork.value.trim(),
         about: f.about.value.trim(),
+        registrationStart: f.registrationStart.value || "",
+        registrationDeadline: f.registrationDeadline.value || "",
         joinOpen: f.joinOpen.value === "true",
       };
     if (id) {
@@ -1375,6 +1421,8 @@ function openClubEditor(id = null) {
       "vicePresident",
       "assignedWork",
       "about",
+      "registrationStart",
+      "registrationDeadline",
     ].forEach((k) => (form.elements[k].value = club[k] || ""));
   form.elements.joinOpen.value = String(club?.joinOpen !== false);
   form.classList.remove("hidden");
@@ -1763,4 +1811,35 @@ start();
     }
     document.body.appendChild(layer);
   } catch (e) {}
+})();
+
+
+/* Minimal persistent light/dark toggle; does not alter the original page layout. */
+(function initCampusThemeToggle() {
+  const key = "campus_connect_theme";
+  const saved = (() => { try { return localStorage.getItem(key); } catch (_) { return null; } })();
+  const apply = (theme) => {
+    document.documentElement.dataset.campusTheme = theme;
+    const btn = document.querySelector("[data-campus-theme-toggle]");
+    if (btn) {
+      btn.textContent = theme === "dark" ? "☀ Light" : "☾ Dark";
+      btn.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      btn.setAttribute("title", btn.getAttribute("aria-label"));
+    }
+  };
+  apply(saved === "dark" ? "dark" : "light");
+  const nav = document.querySelector(".nav-right");
+  if (nav && !nav.querySelector("[data-campus-theme-toggle]")) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "campus-theme-toggle";
+    btn.setAttribute("data-campus-theme-toggle", "");
+    btn.addEventListener("click", () => {
+      const next = document.documentElement.dataset.campusTheme === "dark" ? "light" : "dark";
+      try { localStorage.setItem(key, next); } catch (_) {}
+      apply(next);
+    });
+    nav.insertBefore(btn, nav.firstChild);
+  }
+  apply(saved === "dark" ? "dark" : "light");
 })();

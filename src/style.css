@@ -1187,3 +1187,179 @@ body[data-page="dashboard"] .dash-header::after{
   display:none !important;
   animation:none !important;
 }
+
+
+/* Minimal dark-mode support: default light theme remains unchanged. */
+html[data-campus-theme="dark"] {
+  color-scheme: dark;
+  --ink: #f1f2f5;
+  --ink-soft: #d0d3dc;
+  --muted: #a4a9b5;
+  --paper: #171923;
+  --paper-card: #222532;
+  --line: #393d4b;
+  --line-dark: #4b5060;
+}
+html[data-campus-theme="dark"] body { background: var(--paper); color: var(--ink); }
+html[data-campus-theme="dark"] .nav { background: rgba(23,25,35,.92); }
+html[data-campus-theme="dark"] .nav-link:hover,
+html[data-campus-theme="dark"] .icon-btn,
+html[data-campus-theme="dark"] .btn-ghost:hover { background: #2a2e3c; }
+html[data-campus-theme="dark"] .event-card,
+html[data-campus-theme="dark"] .club-card,
+html[data-campus-theme="dark"] .panel,
+html[data-campus-theme="dark"] .stat-card,
+html[data-campus-theme="dark"] .form-card,
+html[data-campus-theme="dark"] .auth-card,
+html[data-campus-theme="dark"] .modal,
+html[data-campus-theme="dark"] .search-box,
+html[data-campus-theme="dark"] input,
+html[data-campus-theme="dark"] select,
+html[data-campus-theme="dark"] textarea { background-color: var(--paper-card); color: var(--ink); border-color: var(--line); }
+html[data-campus-theme="dark"] input::placeholder,
+html[data-campus-theme="dark"] textarea::placeholder { color: #a4a9b5; }
+html[data-campus-theme="dark"] .nav-link,
+html[data-campus-theme="dark"] .btn-ghost,
+html[data-campus-theme="dark"] .event-title,
+html[data-campus-theme="dark"] .club-name,
+html[data-campus-theme="dark"] .section-title { color: var(--ink); }
+html[data-campus-theme="dark"] .mobile-nav .chip { color: var(--ink); border-color: var(--line); }
+.campus-theme-toggle { min-width:38px; min-height:38px; border:1.5px solid var(--line-dark); border-radius:999px; padding:0 12px; background:var(--paper-card); color:var(--ink); font:600 12px Inter,sans-serif; }
+
+
+/* Dark mode readability fixes: preserve the original layout and accent colors. */
+html[data-campus-theme="dark"] .legacy-page :is(h1,h2,h3,h4,p,label,.event-title,.club-name,.event-meta,.event-meta-row,.event-date,.event-venue,.event-registered,.cap-text,.club-meta,.club-about,.section-title,.event-discovery-text,.event-quick-info,.event-results-count,.event-search-area,.form-label,.field-label,.panel-title,.stat-label,.stat-value,.auth-subtitle,.dash-welcome,.dash-subtitle) {
+  color: var(--ink) !important;
+}
+html[data-campus-theme="dark"] .legacy-page :is(.nav-link,.mobile-nav .chip,.btn-ghost,.icon-btn) { color: var(--ink-soft); }
+html[data-campus-theme="dark"] .legacy-page :is(input,select,textarea) { color: var(--ink) !important; background-color: var(--paper-card) !important; border-color: var(--line) !important; }
+html[data-campus-theme="dark"] .legacy-page :is(input,textarea)::placeholder { color: var(--muted) !important; }
+html[data-campus-theme="dark"] .campus-theme-toggle { cursor: pointer; }
+
+
+/* Final dark-mode contrast patch: retain the existing design and card colors.
+   Pink/closed event cards need dark text for contrast in BOTH themes. */
+.event-card.event-closed,
+.event-card.event-closed :is(h1,h2,h3,h4,p,span,small,strong,a,button,div),
+.club-card.club-closed,
+.club-card.club-closed :is(h1,h2,h3,h4,p,span,small,strong,a,button,div),
+.pin-card.event-closed,
+.pin-card.event-closed :is(h1,h2,h3,h4,p,span,small,strong,a,button,div) {
+  color: #243247;
+}
+.event-card.event-closed .event-title,
+.event-card.event-closed .event-meta,
+.event-card.event-closed .event-meta-row,
+.event-card.event-closed .event-date,
+.event-card.event-closed .event-venue,
+.event-card.event-closed .event-registered,
+.club-card.club-closed .club-name,
+.club-card.club-closed .club-meta,
+.club-card.club-closed .club-about,
+.pin-card.event-closed .pin-title,
+.pin-card.event-closed .pin-meta {
+  color: #243247 !important;
+}
+.event-card.event-closed .btn,
+.event-card.event-closed button,
+.pin-card.event-closed .btn,
+.pin-card.event-closed button {
+  color: #243247;
+}
+
+/* Keep the theme toggle readable and ensure only the injected toggle is styled. */
+.campus-theme-toggle {
+  color: var(--ink) !important;
+  background: var(--paper-card) !important;
+  border-color: var(--line-dark) !important;
+}
+html[data-campus-theme="dark"] .campus-theme-toggle {
+  color: #f1f2f5 !important;
+  background: #222532 !important;
+  border-color: #4b5060 !important;
+}
+
+
+/* Context-aware dark theme contrast fix.
+   Keep the original layout and palette; choose text color based on each surface. */
+
+/* Cards with pale/pink surfaces must always use dark readable text. */
+.legacy-page .event-card.event-closed :is(h1,h2,h3,h4,p,span,small,strong,a,button,div),
+.legacy-page .club-card.event-closed :is(h1,h2,h3,h4,p,span,small,strong,a,button,div),
+.legacy-page .pin-card :is(h1,h2,h3,h4,p,span,small,strong,a,button,div) {
+  color: #263247 !important;
+}
+.legacy-page .event-card.event-closed .tag,
+.legacy-page .event-card.event-closed .status-badge,
+.legacy-page .event-card.event-closed .category-tag,
+.legacy-page .pin-card .tag,
+.legacy-page .pin-card .status-badge,
+.legacy-page .pin-card .category-tag {
+  color: inherit !important;
+}
+
+/* Open cards use the dark card surface in dark mode, so their text must be light. */
+html[data-campus-theme="dark"] .legacy-page .event-card:not(.event-closed) :is(h1,h2,h3,h4,p,span,small,strong,a,button,div),
+html[data-campus-theme="dark"] .legacy-page .club-card:not(.club-closed) :is(h1,h2,h3,h4,p,span,small,strong,a,button,div) {
+  color: #eef2f8 !important;
+}
+html[data-campus-theme="dark"] .legacy-page .event-card:not(.event-closed) .tag,
+html[data-campus-theme="dark"] .legacy-page .club-card:not(.club-closed) .tag {
+  color: inherit !important;
+}
+
+/* Admin tables intentionally have white rows: keep row text dark and headers as designed. */
+html[data-campus-theme="dark"] .legacy-page .admin-table-wrap,
+html[data-campus-theme="dark"] .legacy-page .admin-table-wrap tbody,
+html[data-campus-theme="dark"] .legacy-page .admin-table-wrap tbody tr,
+html[data-campus-theme="dark"] .legacy-page .admin-table-wrap tbody td,
+html[data-campus-theme="dark"] .legacy-page table:not(.dark-surface) tbody tr,
+html[data-campus-theme="dark"] .legacy-page table:not(.dark-surface) tbody td {
+  color: #263247 !important;
+}
+html[data-campus-theme="dark"] .legacy-page .admin-table-wrap thead th,
+html[data-campus-theme="dark"] .legacy-page table:not(.dark-surface) thead th {
+  color: #ffcf45 !important;
+}
+
+/* The map panel and its heading area are white/light surfaces in both themes. */
+html[data-campus-theme="dark"] .legacy-page .events-map-panel,
+html[data-campus-theme="dark"] .legacy-page .map-panel-head {
+  background: #fff !important;
+  color: #263247 !important;
+}
+html[data-campus-theme="dark"] .legacy-page .map-panel-head :is(h1,h2,h3,h4,p,span,small,strong,a,button,div) {
+  color: #263247 !important;
+}
+html[data-campus-theme="dark"] .legacy-page .map-panel-head .eyebrow {
+  color: #596579 !important;
+}
+
+/* If the footer is rendered on a pale surface, its text must not stay white. */
+html[data-campus-theme="dark"] .legacy-page footer.footer {
+  background: #f0f1f5 !important;
+  color: #263247 !important;
+}
+html[data-campus-theme="dark"] .legacy-page footer.footer :is(h1,h2,h3,h4,p,span,small,strong,a,div) {
+  color: #4a5262 !important;
+}
+html[data-campus-theme="dark"] .legacy-page footer.footer .brand,
+html[data-campus-theme="dark"] .legacy-page footer.footer .brand-mark {
+  color: #263247 !important;
+}
+html[data-campus-theme="dark"] .legacy-page footer.footer .brand-mark {
+  color: #ff8a1e !important;
+}
+
+/* Theme button should show a clear label and contrast against the navbar. */
+html[data-campus-theme="dark"] .campus-theme-toggle {
+  color: #f1f2f5 !important;
+  background: #222532 !important;
+  border-color: #4b5060 !important;
+}
+html[data-campus-theme="light"] .campus-theme-toggle,
+html:not([data-campus-theme="dark"]) .campus-theme-toggle {
+  color: #242938 !important;
+  background: #fff !important;
+  border-color: #d3d0c3 !important;
+}
